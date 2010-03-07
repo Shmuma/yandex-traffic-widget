@@ -6,7 +6,7 @@ HEADERS += qmaemo5homescreenadaptor.h
 SOURCES += main.cpp
 HEADERS += mainwidget.hpp
 
-include (ynadex-traffic-core.pri)
+include (yandex-traffic-core.pri)
 
 desktop.path = /usr/share/applications/hildon-home
 desktop.files = yandex-traffic-widget.desktop
