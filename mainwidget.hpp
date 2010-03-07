@@ -3,15 +3,25 @@
 
 #include <QtGui>
 
+#include <settings.hpp>
+#include <regions.hpp>
+
+
 class MainWidget : public QLabel
 {
     Q_OBJECT
+private:
+    RegionsTable _regions;
+    Settings _settings;
+
 public:
     MainWidget ()
-        : QLabel (tr ("Hello, World"))
+        : QLabel ()
     {
         setAlignment(Qt::AlignCenter);
         setAttribute(Qt::WA_TranslucentBackground);
+
+        setText (_settings.regions ().join (", "));
     }
 
     QSize sizeHint() const
