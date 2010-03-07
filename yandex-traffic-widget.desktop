@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Yandex.Traffic
+Comment=Widget wich displays Yandex.Traffic information
+Type=qt
+X-Path=yandex-traffic-widget
+X-Multiple-Instances=false
+X-home-applet-minwidth=100
+X-home-applet-minheight=72
+Name[en_US]=Yandex.Traffic widget
