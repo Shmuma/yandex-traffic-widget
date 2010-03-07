@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     QMaemo5HomescreenAdaptor *adaptor = new QMaemo5HomescreenAdaptor (&w);
 
     adaptor->setSettingsAvailable (true);
-    
+
     w.show ();
 
     return app.exec ();
