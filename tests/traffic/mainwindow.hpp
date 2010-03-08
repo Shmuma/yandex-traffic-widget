@@ -15,7 +15,13 @@ private:
 protected slots:
     void fetchTraffic ()
     {
-        printf ("Clicked\n");
+        printf ("Traffic update requested\n");
+        _traffic.update ();
+    }
+
+    void trafficUpdated ()
+    {
+        printf ("Traffic data updated\n");
     }
 
 public:
@@ -23,7 +29,8 @@ public:
         : QPushButton ()
     {
         connect (this, SIGNAL (clicked ()), this, SLOT (fetchTraffic ()));
-        setText ("Push me");
+        connect (&_traffic, SIGNAL (updated ()), this, SLOT (trafficUpdated ()));
+        setText ("Fetch traffic information");
     }
 };
 

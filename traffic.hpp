@@ -2,7 +2,10 @@
 #define __TRAFFIC_H__
 
 #include <QtCore>
+#include <QtNetwork>
 
+
+#include "http_fetcher.hpp"
 
 // Base data of traffic information
 class TrafficInfo
@@ -39,16 +42,28 @@ public:
 };
 
 
-class Traffic
+class Traffic : public QObject
 {
+    Q_OBJECT
+
 private:
     QDateTime _ts;
 
     QMap<QString, TrafficInfo> _info;
     QMap<QString, ExtendedTrafficInfo> _ext_info;
 
+    HttpFetcher _fetcher;
+
+private slots:
+    void fetchDone (const QByteArray& data);
+
+signals:
+    void updated ();
+
 public:
     Traffic ();
+
+    void update ();
 };
 
 
