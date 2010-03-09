@@ -21,8 +21,9 @@ public:
         const RegionInfo *ri;
 
         setAlignment(Qt::AlignCenter);
+#ifdef Q_WS_MAEMO_5
         setAttribute(Qt::WA_TranslucentBackground);
-
+#endif
         ri = _regions.lookup (_settings.regions ()[0]);
 
         setText (_settings.regions ().join (", ") + ", " + QString (ri ? ri->name () : ""));
@@ -30,7 +31,7 @@ public:
 
     QSize sizeHint() const
     {
-        return 2 * QLabel::sizeHint();
+        return QLabel::sizeHint() + QSize (20, 0);
     }
 
 protected:
@@ -39,7 +40,7 @@ protected:
         QPainter p(this);
         p.setBrush(QColor(0, 0, 0, 128));
         p.setPen(Qt::NoPen);
-        p.drawRoundedRect(rect(), 25, 25);
+        p.drawRoundedRect(rect(), 10, 10);
         p.end();
 
         QLabel::paintEvent(event);

@@ -1,2 +1,2 @@
 TEMPLATE = subdirs
-SUBDIRS = regions traffic
+SUBDIRS = regions traffic widget
