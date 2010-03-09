@@ -24,16 +24,7 @@ public:
     QSize sizeHint () const;
 
 protected:
-    void paintEvent(QPaintEvent *event)
-    {
-        QPainter p(this);
-        p.setBrush(QColor(0, 0, 0, 128));
-        p.setPen(Qt::NoPen);
-        p.drawRoundedRect(rect(), 10, 10);
-        p.end();
-
-        QWidget::paintEvent(event);
-    }
+    void paintEvent (QPaintEvent *event);
 };
 
 #endif /* __MAINWIDGET_H__ */

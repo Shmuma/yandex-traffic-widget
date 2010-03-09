@@ -29,3 +29,15 @@ QSize MainWidget::sizeHint() const
 {
     return QWidget::sizeHint () + QSize (20, 0);
 }
+
+
+void MainWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter p(this);
+    p.setBrush(QColor(0, 0, 0, 128));
+    p.setPen(Qt::NoPen);
+    p.drawRoundedRect(rect(), 10, 10);
+    p.end();
+
+    QWidget::paintEvent(event);
+}
