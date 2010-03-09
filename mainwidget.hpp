@@ -3,36 +3,25 @@
 
 #include <QtGui>
 
-#include <settings.hpp>
-#include <regions.hpp>
+#include "settings.hpp"
+#include "regions.hpp"
+#include "light.hpp"
 
 
-class MainWidget : public QLabel
+class MainWidget : public QWidget
 {
     Q_OBJECT
 private:
     RegionsTable _regions;
     Settings _settings;
 
+    // Widgets
+    TrafficLight *_light;
+    QLabel *_label;
+
 public:
-    MainWidget ()
-        : QLabel ()
-    {
-        const RegionInfo *ri;
-
-        setAlignment(Qt::AlignCenter);
-#ifdef Q_WS_MAEMO_5
-        setAttribute(Qt::WA_TranslucentBackground);
-#endif
-        ri = _regions.lookup (_settings.regions ()[0]);
-
-        setText (_settings.regions ().join (", ") + ", " + QString (ri ? ri->name () : ""));
-    }
-
-    QSize sizeHint() const
-    {
-        return QLabel::sizeHint() + QSize (20, 0);
-    }
+    MainWidget ();
+    QSize sizeHint () const;
 
 protected:
     void paintEvent(QPaintEvent *event)
@@ -43,7 +32,7 @@ protected:
         p.drawRoundedRect(rect(), 10, 10);
         p.end();
 
-        QLabel::paintEvent(event);
+        QWidget::paintEvent(event);
     }
 };
 
