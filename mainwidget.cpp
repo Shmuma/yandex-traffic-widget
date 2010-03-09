@@ -21,7 +21,13 @@ MainWidget::MainWidget ()
         layout->addWidget (_label);
         setLayout (layout);
 
-        _label->setText ("Bla-bla");
+        connect (&_traffic, SIGNAL (updated ()), SLOT (trafficUpdated ()));
+
+        // every 5 minutes (TODO, make option)
+        startTimer (5*60*1000);
+
+        // perform update just after creation
+        _traffic.update ();
 }
 
 
@@ -40,4 +46,28 @@ void MainWidget::paintEvent(QPaintEvent *event)
     p.end();
 
     QWidget::paintEvent(event);
+}
+
+
+void MainWidget::timerEvent (QTimerEvent *)
+{
+    // Perform traffic information refresh
+    // TODO: only if internet connection is available
+    _traffic.update ();
+}
+
+
+void MainWidget::trafficUpdated ()
+{
+    ExtendedTrafficInfo info = _traffic.lookup_ext ("1");
+
+    if (info.valid ()) {
+        _light->setColor (info.color ());
+        _label->setText (QString ("%1, %2\n%3")
+                         .arg (QString::number (info.level ()))
+                         .arg (info.localtime ())
+                         .arg (info.hint ()));
+    }
+    else
+        _light->setColor (ExtendedTrafficInfo::Unknown);
 }

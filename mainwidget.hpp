@@ -3,6 +3,7 @@
 
 #include <QtGui>
 
+#include "traffic.hpp"
 #include "settings.hpp"
 #include "regions.hpp"
 #include "light.hpp"
@@ -12,6 +13,7 @@ class MainWidget : public QWidget
 {
     Q_OBJECT
 private:
+    Traffic _traffic;
     RegionsTable _regions;
     Settings _settings;
 
@@ -25,6 +27,10 @@ public:
 
 protected:
     void paintEvent (QPaintEvent *event);
+    void timerEvent (QTimerEvent *event);
+
+protected slots:
+    void trafficUpdated ();
 };
 
 #endif /* __MAINWIDGET_H__ */
