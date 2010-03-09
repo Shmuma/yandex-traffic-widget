@@ -37,6 +37,12 @@ public:
 
     bool valid () const
     { return _valid; };
+
+    QString localtime () const
+    { return _localtime; };
+
+    QDateTime ts () const
+    { return _ts; };
 };
 
 
