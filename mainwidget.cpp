@@ -33,7 +33,7 @@ MainWidget::MainWidget ()
 
 QSize MainWidget::sizeHint() const
 {
-    return QWidget::sizeHint () + QSize (20, 0);
+    return _label->sizeHint () + _light->sizeHint () + QSize (20, 0);
 }
 
 

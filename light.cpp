@@ -10,6 +10,7 @@ TrafficLight::TrafficLight (QWidget *parent)
     : QWidget (parent)
 {
     _color = ExtendedTrafficInfo::Unknown;
+    setMinimumSize (30, 30);
 }
 
 
