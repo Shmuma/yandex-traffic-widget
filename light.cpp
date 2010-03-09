@@ -9,7 +9,7 @@
 TrafficLight::TrafficLight (QWidget *parent)
     : QWidget (parent)
 {
-    _color = ExtendedTrafficInfo::Green;
+    _color = ExtendedTrafficInfo::Unknown;
 }
 
 
@@ -20,6 +20,9 @@ void TrafficLight::paintEvent (QPaintEvent *)
     int side = qMin (width (), height ());
 
     switch (_color) {
+        case ExtendedTrafficInfo::Unknown:
+            color = Qt::gray;
+            break;
         case ExtendedTrafficInfo::Green:
             color = Qt::green;
             break;

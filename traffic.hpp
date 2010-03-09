@@ -44,6 +44,7 @@ class ExtendedTrafficInfo : public TrafficInfo
 {
 public:
     enum light_color {
+        Unknown,
         Red,
         Yellow,
         Green
