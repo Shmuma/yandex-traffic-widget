@@ -3,4 +3,5 @@ moc_*
 Makefile
 traffic
 regions
+widget
 *.so
