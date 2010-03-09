@@ -72,6 +72,9 @@ public:
 
     QString hint () const
     { return _hint; };
+
+    ExtendedTrafficInfo::light_color color () const
+    { return _color; };
 };
 
 
