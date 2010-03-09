@@ -21,7 +21,13 @@ protected slots:
 
     void trafficUpdated ()
     {
-        printf ("Traffic data updated\n");
+        ExtendedTrafficInfo info;
+
+        printf ("Traffic data updated:\n");
+        printf ("ts: %s\n", _traffic.ts ().toString ().toUtf8 ().data ());
+
+        info = _traffic.lookup_ext ("1");
+        printf ("Moscow: %d, %d, %s\n", info.level (), info.tend (), info.hint ().toUtf8 ().data ());
     }
 
 public:

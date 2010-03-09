@@ -3,6 +3,7 @@
 
 #include <QtCore>
 #include <QtNetwork>
+#include <QtXml>
 
 
 #include "http_fetcher.hpp"
@@ -16,8 +17,26 @@ private:
     QString _isotime;
     QString _localtime;
 
+    bool _valid;
+
+protected:
+    float getFloatNode (const QDomElement& elem, const char* node, float def);
+    int getIntNode (const QDomElement& elem, const char* node, int def);
+    QString getStringNode (const QDomElement& elem, const char* node) throw (const QString&);
+    QDateTime getTSNode (const QDomElement& elem, const char* node) throw (const QString&);
+
+    void setValid (bool new_val)
+    { _valid = new_val; };
+
 public:
-    TrafficInfo ();
+    TrafficInfo ()
+        : _valid (false)
+    {};
+
+    TrafficInfo (const QDomElement& elem) throw (const QString&);
+
+    bool valid () const
+    { return _valid; };
 };
 
 
@@ -32,13 +51,26 @@ public:
 
 private:
     float _level_raw;
-    quint8 _level;
+    int _level;
     light_color _color;
-    quint8 _tend;
+    int _tend;
     QString _hint;
 
 public:
-    ExtendedTrafficInfo ();
+    ExtendedTrafficInfo ()
+        : TrafficInfo ()
+    {};
+
+    ExtendedTrafficInfo (const QDomElement& elem) throw (const QString&);
+
+    int level () const
+    { return _level; };
+
+    int tend () const
+    { return _tend; };
+
+    QString hint () const
+    { return _hint; };
 };
 
 
@@ -54,6 +86,8 @@ private:
 
     HttpFetcher _fetcher;
 
+    bool parse_traffic_data (const QString& xml);
+
 private slots:
     void fetchDone (const QByteArray& data);
 
@@ -64,6 +98,12 @@ public:
     Traffic ();
 
     void update ();
+
+    QDateTime ts () const
+    { return _ts; };
+
+    TrafficInfo lookup (const QString &id) const;
+    ExtendedTrafficInfo lookup_ext (const QString &id) const;
 };
 
 
