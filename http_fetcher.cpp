@@ -2,7 +2,8 @@
 #include <QtNetwork>
 
 #include "http_fetcher.hpp"
-
+#include "connection.hpp"
+#include "globals.hpp"
 
 // --------------------------------------------------
 // HttpFetcher
@@ -24,10 +25,11 @@ void HttpFetcher::fetch (const QString& url)
 {
     QUrl u (url);
 
-    if (u.isValid ()) {
-        _http.setHost (u.host ());
-        _http.get (u.encodedPath (), &_buffer);
-    }
+    if (!CHECK_FOR_CONNECTION || ConnectionChecker::instance ()->isConnected ())
+        if (u.isValid ()) {
+            _http.setHost (u.host ());
+            _http.get (u.encodedPath (), &_buffer);
+        }
 }
 
 
