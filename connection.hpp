@@ -15,10 +15,10 @@ private:
     QDBusConnection _bus;
     QDBusInterface *_itf;
 
+protected:
     ConnectionChecker ();
 
-protected:
-    void requestState ();
+    void updateState (bool new_state);
 
 protected slots:
     void stateSignal (const QDBusMessage& msg);
@@ -28,6 +28,8 @@ public:
 
     bool isConnected () const
     { return _connected; };
+
+    void requestState ();
 
 signals:
     void connected (bool active);

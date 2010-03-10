@@ -33,9 +33,11 @@ ConnectionChecker::ConnectionChecker ()
 
 void ConnectionChecker::requestState ()
 {
-    QDBusMessage msg = QDBusMessage::createSignal (ICD_DBUS_API_PATH, ICD_DBUS_API_INTERFACE, ICD_DBUS_API_STATE_REQ);
+    QDBusMessage reply = _itf->call (ICD_DBUS_API_STATE_REQ);
 
-    _bus.send (msg);
+    // If there is no connection, we get no reply at all
+    if (!reply.arguments ().value (0).toUInt ())
+        updateState (false);
 }
 
 
@@ -43,16 +45,14 @@ void ConnectionChecker::stateSignal (const QDBusMessage& msg)
 {
     unsigned int status = msg.arguments ().value (7).value<unsigned int>();
 
-    if (status == ICD_STATE_CONNECTED) {
-        if (!_connected) {
-            _connected = true;
-            emit connected (true);
-        }
-    }
-    else {
-        if (_connected) {
-            _connected = false;
-            emit connected (false);
-        }
+    updateState (status == ICD_STATE_CONNECTED);
+}
+
+
+void ConnectionChecker::updateState (bool new_state)
+{
+    if (new_state != _connected) {
+        _connected = new_state;
+        emit connected (_connected);
     }
 }
