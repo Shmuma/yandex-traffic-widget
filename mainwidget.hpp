@@ -13,20 +13,26 @@ class MainWidget : public QWidget
 {
     Q_OBJECT
 private:
-    Traffic _traffic;
-    RegionsTable _regions;
-    Settings _settings;
+    Traffic* _traffic;
+    RegionsTable* _regions;
+    Settings* _settings;
 
     // Widgets
-    TrafficLight *_light;
-    QLabel *_label;
+    TrafficLight* _light;
+    QLabel* _label;
 
 public:
     MainWidget ();
+    virtual ~MainWidget ();
+
+public slots:
+    void settingsDialog ();
 
 protected:
     void paintEvent (QPaintEvent *event);
     void timerEvent (QTimerEvent *event);
+
+    void updateData ();
 
 protected slots:
     void trafficUpdated ();
