@@ -90,7 +90,7 @@ void MainWidget::updateData ()
 
 void MainWidget::settingsDialog ()
 {
-    SettingsDialog dlg (this, _settings);
+    SettingsDialog dlg (_settings);
 
     dlg.exec ();
 }

@@ -2,6 +2,7 @@
 #define __SETTINGSDIALOG_H__
 
 #include <QtGui>
+#include <QtMaemo5>
 
 #include "settings.hpp"
 
@@ -9,8 +10,14 @@
 class SettingsDialog : public QDialog
 {
     Q_OBJECT
+
+private:
+    QMaemo5ValueButton *displayButton;
+    QMaemo5ValueButton *updateButton;
+    QMaemo5ValueButton *alertsButton;
+
 public:
-    SettingsDialog (QWidget *parent, Settings *settings);
+    SettingsDialog (Settings *settings);
 };
 
 
