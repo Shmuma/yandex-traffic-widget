@@ -10,31 +10,27 @@
 MainWidget::MainWidget ()
     : QWidget ()
 {
+    setMinimumSize (300, 80);
 #ifdef Q_WS_MAEMO_5
-        setAttribute(Qt::WA_TranslucentBackground);
+    setAttribute(Qt::WA_TranslucentBackground);
 #endif
-        _light = new TrafficLight (this);
-        _label = new QLabel (this);
+    _light = new TrafficLight (this);
+    _label = new QLabel (this);
 
-        QHBoxLayout *layout = new QHBoxLayout;
-        layout->addWidget (_light);
-        layout->addWidget (_label);
-        setLayout (layout);
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget (_light);
+    layout->addWidget (_label);
+    setLayout (layout);
 
-        connect (&_traffic, SIGNAL (updated ()), SLOT (trafficUpdated ()));
+    connect (&_traffic, SIGNAL (updated ()), SLOT (trafficUpdated ()));
 
-        // every 5 minutes (TODO, make option)
-        startTimer (5*60*1000);
+    // every 5 minutes (TODO, make option)
+    startTimer (5*60*1000);
 
-        // perform update just after creation
-        _traffic.update ();
+    // perform update just after creation
+    _traffic.update ();
 }
 
-
-QSize MainWidget::sizeHint() const
-{
-    return _label->sizeHint () + _light->sizeHint () + QSize (20, 0);
-}
 
 
 void MainWidget::paintEvent(QPaintEvent *event)
@@ -55,6 +51,7 @@ void MainWidget::timerEvent (QTimerEvent *)
     // TODO: only if internet connection is available
     _traffic.update ();
 }
+
 
 
 void MainWidget::trafficUpdated ()

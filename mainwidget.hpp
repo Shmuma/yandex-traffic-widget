@@ -23,7 +23,6 @@ private:
 
 public:
     MainWidget ();
-    QSize sizeHint () const;
 
 protected:
     void paintEvent (QPaintEvent *event);
