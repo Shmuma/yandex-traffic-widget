@@ -1,12 +1,25 @@
 #ifndef __SETTINGS_H__
 #define __SETTINGS_H__
 
+#include <QtCore>
 
 
-class Settings
+class Settings : public QObject
 {
+    Q_OBJECT
+public:
+    enum check_t {
+        C_Light = 0,
+        C_Rank,
+        C_Time,
+        C_Hint,
+        C_TotalCount
+    };
+
 private:
-    QStringList _regions;       // List of regions IDs to display
+    QString _regionID;          // region ID which will be displayed
+    QMap<QString, QString> _cities;
+    bool _checks[C_TotalCount];
 
     void makeDefault ();
 
@@ -16,8 +29,14 @@ public:
     bool load ();
     bool save ();
 
-    QStringList regions () const
-    { return _regions; };
+    QString regionID () const
+    { return _regionID; };
+
+    QMap<QString, QString> cities () const
+    { return _cities; };
+
+    bool check (check_t entry) const
+    { return _checks[entry]; };
 };
 
 

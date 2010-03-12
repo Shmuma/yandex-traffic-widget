@@ -21,8 +21,31 @@ private:
     QMaemo5ValueButton *updateButton;
     QMaemo5ValueButton *alertsButton;
 
+    Settings *_settings;
+
+protected slots:
+    void displayClicked ();
+
 public:
     SettingsDialog (Settings *settings);
+};
+
+
+class DisplaySettingsDialog : public QDialog
+{
+    Q_OBJECT
+
+private:
+    Settings *_settings;
+    QListWidget *_cities;
+    QCheckBox *_showLight, *_showRank, *_showTime, *_showHint;
+    QPushButton *_saveButton;
+
+    void initCities (QBoxLayout *layout);
+    void initChecks (QBoxLayout *layout);
+
+public:
+    DisplaySettingsDialog (Settings *settings);
 };
 
 
