@@ -1,5 +1,11 @@
 #include <QtGui>
+
+#ifdef Q_WS_MAEMO_5
 #include <QtMaemo5>
+#else
+#include "QtMaemo5Adapters.hpp"
+#endif
+
 #include "settingsDialog.hpp"
 
 
