@@ -47,6 +47,7 @@ DisplaySettingsDialog::DisplaySettingsDialog (Settings *settings)
       _settings (settings)
 {
     setWindowTitle (tr ("Display settings"));
+    setMinimumSize (300, 400);
 
     QHBoxLayout *layout = new QHBoxLayout (this);
     QVBoxLayout *left_layout = new QVBoxLayout ();
@@ -113,6 +114,11 @@ void DisplaySettingsDialog::initChecks (QBoxLayout *layout)
 
 void DisplaySettingsDialog::saveClicked ()
 {
+    QListWidgetItem *cur = _cities->currentItem ();
+
+    if (cur)
+        _settings->setRegionID (cur->data (Qt::UserRole).toString ());
+
     _settings->setCheck (Settings::C_Light, _showLight->isChecked ());
     _settings->setCheck (Settings::C_Rank,  _showRank->isChecked ());
     _settings->setCheck (Settings::C_Time,  _showTime->isChecked ());

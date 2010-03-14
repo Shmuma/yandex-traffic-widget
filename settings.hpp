@@ -34,6 +34,9 @@ public:
     QString regionID () const
     { return _regionID; };
 
+    void setRegionID (const QString &id)
+    { _regionID = id; };
+
     QMap<QString, QString> cities () const
     { return _cities; };
 
