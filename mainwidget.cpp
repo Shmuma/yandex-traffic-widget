@@ -26,6 +26,8 @@ MainWidget::MainWidget ()
     layout->addWidget (_label);
     setLayout (layout);
 
+    _light->setVisible (_settings->check (Settings::C_Light));
+
     connect (_traffic, SIGNAL (updated ()), SLOT (trafficUpdated ()));
 
     // every 5 minutes (TODO, make option)
@@ -70,11 +72,29 @@ void MainWidget::trafficUpdated ()
     ExtendedTrafficInfo info = _traffic->lookup_ext ("1");
 
     if (info.valid ()) {
+        QString data;
+        bool first = true;
         _light->setColor (info.color ());
-        _label->setText (QString ("%1, %2\n%3")
-                         .arg (QString::number (info.level ()))
-                         .arg (info.localtime ())
-                         .arg (info.hint ()));
+
+        if (_settings->check (Settings::C_Rank)) {
+            data.append (QString::number (info.level ()));
+            data.append (info.level () > 1 ? tr (" points") : tr (" point"));
+            first = false;
+        }
+
+        if (_settings->check (Settings::C_Time)) {
+            if (!first)
+                data.append (", ");
+            data.append (info.localtime ());
+            first = false;
+        }
+
+        if (_settings->check (Settings::C_Hint)) {
+            data.append ("\n");
+            data.append (info.hint ());
+        }
+
+        _label->setText (data);
     }
     else
         _light->setColor (ExtendedTrafficInfo::Unknown);
@@ -93,4 +113,9 @@ void MainWidget::settingsDialog ()
     SettingsDialog dlg (_settings);
 
     dlg.exec ();
+
+    // Handle settings
+    _light->setVisible (_settings->check (Settings::C_Light));
+
+    trafficUpdated ();
 }
