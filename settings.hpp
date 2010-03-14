@@ -22,11 +22,14 @@ private:
 
     void makeDefault ();
 
+    void loadCities (QSettings *settings);
+    void saveCities (QSettings *settings);
+
 public:
     Settings ();
 
-    bool load ();
-    bool save ();
+    void load ();
+    void save ();
 
     QString regionID () const
     { return _regionID; };

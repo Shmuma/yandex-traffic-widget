@@ -117,5 +117,6 @@ void DisplaySettingsDialog::saveClicked ()
     _settings->setCheck (Settings::C_Rank,  _showRank->isChecked ());
     _settings->setCheck (Settings::C_Time,  _showTime->isChecked ());
     _settings->setCheck (Settings::C_Hint,  _showHint->isChecked ());
+    _settings->save ();
     accept ();
 }
