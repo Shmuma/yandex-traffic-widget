@@ -10,12 +10,13 @@
 MainWidget::MainWidget ()
     : QWidget ()
 {
-    setMinimumSize (300, 80);
 #ifdef Q_WS_MAEMO_5
     setAttribute(Qt::WA_TranslucentBackground);
 #endif
     _light = new TrafficLight (this);
     _label = new QLabel (this);
+
+    _label->setAlignment (Qt::AlignHCenter | Qt::AlignVCenter);
 
     _traffic = new Traffic;
     _regions = new RegionsTable;
@@ -27,6 +28,8 @@ MainWidget::MainWidget ()
     setLayout (layout);
 
     _light->setVisible (_settings->check (Settings::C_Light));
+
+    updateSize ();
 
     connect (_traffic, SIGNAL (updated ()), SLOT (trafficUpdated ()));
 
@@ -90,7 +93,8 @@ void MainWidget::trafficUpdated ()
         }
 
         if (_settings->check (Settings::C_Hint)) {
-            data.append ("\n");
+            if (!first)
+                data.append ("\n");
             data.append (info.hint ());
         }
 
@@ -117,5 +121,25 @@ void MainWidget::settingsDialog ()
     // Handle settings
     _light->setVisible (_settings->check (Settings::C_Light));
 
+    updateSize ();
     trafficUpdated ();
+}
+
+
+void MainWidget::updateSize ()
+{
+    QSize minSize (0, 80);
+
+    if (_settings->check (Settings::C_Light))
+        minSize += QSize (80, 0);
+    if (_settings->check (Settings::C_Hint))
+        minSize += QSize (270, 0);
+    else {
+        if (_settings->check (Settings::C_Time))
+            minSize += QSize (75, 0);
+        if (_settings->check (Settings::C_Rank))
+            minSize += QSize (75, 0);
+    }
+
+    setFixedSize (minSize);
 }

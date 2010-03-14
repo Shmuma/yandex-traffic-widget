@@ -33,6 +33,7 @@ protected:
     void timerEvent (QTimerEvent *event);
 
     void updateData ();
+    void updateSize ();
 
 protected slots:
     void trafficUpdated ();
