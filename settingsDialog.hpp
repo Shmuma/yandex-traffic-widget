@@ -44,6 +44,9 @@ private:
     void initCities (QBoxLayout *layout);
     void initChecks (QBoxLayout *layout);
 
+protected slots:
+    void saveClicked ();
+
 public:
     DisplaySettingsDialog (Settings *settings);
 };

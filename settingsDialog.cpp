@@ -54,6 +54,8 @@ DisplaySettingsDialog::DisplaySettingsDialog (Settings *settings)
 
     // Right side
     _saveButton = new QPushButton (tr ("&Save"), this);
+    connect (_saveButton, SIGNAL (clicked ()), SLOT (saveClicked ()));
+
     right_layout->addStretch ();
     right_layout->addWidget (_saveButton);
 
@@ -92,9 +94,13 @@ void DisplaySettingsDialog::initChecks (QBoxLayout *layout)
     QGridLayout *grid = new QGridLayout;
 
     _showLight = new QCheckBox ("Light", this);
+    _showLight->setChecked (_settings->check (Settings::C_Light));
     _showRank = new QCheckBox ("Rank", this);
+    _showRank->setChecked (_settings->check (Settings::C_Rank));
     _showTime = new QCheckBox ("Time", this);
+    _showTime->setChecked (_settings->check (Settings::C_Time));
     _showHint = new QCheckBox ("Hint", this);
+    _showHint->setChecked (_settings->check (Settings::C_Hint));
 
     grid->addWidget (_showLight, 0, 0);
     grid->addWidget (_showRank, 0, 1);
@@ -102,4 +108,14 @@ void DisplaySettingsDialog::initChecks (QBoxLayout *layout)
     grid->addWidget (_showHint, 1, 1);
 
     layout->addLayout (grid);
+}
+
+
+void DisplaySettingsDialog::saveClicked ()
+{
+    _settings->setCheck (Settings::C_Light, _showLight->isChecked ());
+    _settings->setCheck (Settings::C_Rank,  _showRank->isChecked ());
+    _settings->setCheck (Settings::C_Time,  _showTime->isChecked ());
+    _settings->setCheck (Settings::C_Hint,  _showHint->isChecked ());
+    accept ();
 }

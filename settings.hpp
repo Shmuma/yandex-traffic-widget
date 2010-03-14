@@ -13,13 +13,12 @@ public:
         C_Rank,
         C_Time,
         C_Hint,
-        C_TotalCount
     };
 
 private:
     QString _regionID;          // region ID which will be displayed
     QMap<QString, QString> _cities;
-    bool _checks[C_TotalCount];
+    QMap<check_t, bool> _checks;
 
     void makeDefault ();
 
@@ -37,6 +36,9 @@ public:
 
     bool check (check_t entry) const
     { return _checks[entry]; };
+
+    void setCheck (check_t entry, bool val)
+    { _checks[entry] = val; }
 };
 
 
