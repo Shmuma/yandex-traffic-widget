@@ -118,13 +118,13 @@ void DisplaySettingsDialog::initChecks (QBoxLayout *layout)
 {
     QGridLayout *grid = new QGridLayout;
 
-    _showLight = new QCheckBox ("Light", this);
+    _showLight = new QCheckBox (tr ("Light"), this);
     _showLight->setChecked (settings ()->check (Settings::C_Light));
-    _showRank = new QCheckBox ("Rank", this);
+    _showRank = new QCheckBox (tr ("Rank"), this);
     _showRank->setChecked (settings ()->check (Settings::C_Rank));
-    _showTime = new QCheckBox ("Time", this);
+    _showTime = new QCheckBox (tr ("Time"), this);
     _showTime->setChecked (settings ()->check (Settings::C_Time));
-    _showHint = new QCheckBox ("Hint", this);
+    _showHint = new QCheckBox (tr ("Hint"), this);
     _showHint->setChecked (settings ()->check (Settings::C_Hint));
 
     grid->addWidget (_showLight, 0, 0);
