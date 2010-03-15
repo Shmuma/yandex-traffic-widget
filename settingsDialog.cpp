@@ -56,9 +56,13 @@ BaseSettingsDialog::BaseSettingsDialog (Settings *settings)
 {
     QHBoxLayout *layout = new QHBoxLayout (this);
     QVBoxLayout *right_layout = new QVBoxLayout ();
+    QSizePolicy policy;
 
     // Right side
     _saveButton = new QPushButton (tr ("Save"), this);
+    policy = _saveButton->sizePolicy ();
+    policy.setHorizontalPolicy (QSizePolicy::Maximum);
+    _saveButton->setSizePolicy (policy);
     connect (_saveButton, SIGNAL (clicked ()), SLOT (saveClicked ()));
 
     right_layout->addStretch ();
@@ -83,8 +87,8 @@ void BaseSettingsDialog::saveClicked ()
 // --------------------------------------------------
 // DisplaySettingsDialog
 // --------------------------------------------------
-DisplaySettingsDialog::DisplaySettingsDialog (Settings *settings)
-    : BaseSettingsDialog (settings)
+DisplaySettingsDialog::DisplaySettingsDialog (Settings *_settings)
+    : BaseSettingsDialog (_settings)
 {
     setWindowTitle (tr ("Display settings"));
     setMinimumSize (300, 400);
@@ -119,13 +123,13 @@ void DisplaySettingsDialog::initChecks (QBoxLayout *layout)
     QGridLayout *grid = new QGridLayout;
 
     _showLight = new QCheckBox (tr ("Light"), this);
-    _showLight->setChecked (settings ()->check (Settings::C_Light));
+    _showLight->setChecked (settings ()->check (Settings::C_ShowLight));
     _showRank = new QCheckBox (tr ("Rank"), this);
-    _showRank->setChecked (settings ()->check (Settings::C_Rank));
+    _showRank->setChecked (settings ()->check (Settings::C_ShowRank));
     _showTime = new QCheckBox (tr ("Time"), this);
-    _showTime->setChecked (settings ()->check (Settings::C_Time));
+    _showTime->setChecked (settings ()->check (Settings::C_ShowTime));
     _showHint = new QCheckBox (tr ("Hint"), this);
-    _showHint->setChecked (settings ()->check (Settings::C_Hint));
+    _showHint->setChecked (settings ()->check (Settings::C_ShowHint));
 
     grid->addWidget (_showLight, 0, 0);
     grid->addWidget (_showRank, 0, 1);
@@ -143,23 +147,65 @@ void DisplaySettingsDialog::saveSettings ()
     if (cur)
         settings ()->setRegionID (cur->data (Qt::UserRole).toString ());
 
-    settings ()->setCheck (Settings::C_Light, _showLight->isChecked ());
-    settings ()->setCheck (Settings::C_Rank,  _showRank->isChecked ());
-    settings ()->setCheck (Settings::C_Time,  _showTime->isChecked ());
-    settings ()->setCheck (Settings::C_Hint,  _showHint->isChecked ());
+    settings ()->setCheck (Settings::C_ShowLight, _showLight->isChecked ());
+    settings ()->setCheck (Settings::C_ShowRank,  _showRank->isChecked ());
+    settings ()->setCheck (Settings::C_ShowTime,  _showTime->isChecked ());
+    settings ()->setCheck (Settings::C_ShowHint,  _showHint->isChecked ());
 }
 
 
 // --------------------------------------------------
 // UpdateSettingsDialog
 // --------------------------------------------------
-UpdateSettingsDialog::UpdateSettingsDialog (Settings *settings)
-    : BaseSettingsDialog (settings)
+UpdateSettingsDialog::UpdateSettingsDialog (Settings *_settings)
+    : BaseSettingsDialog (_settings)
 {
     setWindowTitle (tr ("Update settings"));
+
+    _wifiUpdate = new QCheckBox (tr ("Update on WiFi connection"), this);
+    _wifiUpdate->setChecked (settings ()->check (Settings::C_UpdateOnWiFi));
+    _gsmUpdate  = new QCheckBox (tr ("Update on GSM connection"), this);
+    _gsmUpdate->setChecked (settings ()->check (Settings::C_UpdateOnGSM));
+
+    initUpdateInterval (layout ());
+
+    layout ()->addWidget (_wifiUpdate);
+    layout ()->addWidget (_gsmUpdate);
 }
 
 
 void UpdateSettingsDialog::saveSettings ()
 {
+#ifdef Q_WS_MAEMO_5
+    QMaemo5ListPickSelector *selector = static_cast<QMaemo5ListPickSelector*> (_intervalButton->pickSelector ());
+
+    if (selector)
+        settings ()->setUpdateIntervalIndex (selector->currentIndex ());
+#endif
+    settings ()->setCheck (Settings::C_UpdateOnWiFi, _wifiUpdate->isChecked ());
+    settings ()->setCheck (Settings::C_UpdateOnGSM,  _gsmUpdate->isChecked ());
+}
+
+
+void UpdateSettingsDialog::initUpdateInterval (QBoxLayout *layout)
+{
+    _intervalButton = new QMaemo5ValueButton (tr ("Update interval"), this);
+    layout->addWidget (_intervalButton);
+
+#ifdef Q_WS_MAEMO_5
+    QMaemo5ListPickSelector *selector = new QMaemo5ListPickSelector;
+    QStandardItemModel *model = new QStandardItemModel (0, 1);
+    QStringList updateIntervals = settings ()->updateIntervals ();
+    QStringList::iterator it = updateIntervals.begin ();
+
+    while (it != updateIntervals.end ()) {
+        model->appendRow (new QStandardItem (*it));
+        it++;
+    }
+
+    selector->setModel (model);
+    selector->setCurrentIndex (settings ()->getUpdateIntervalIndex ());
+
+    _intervalButton->setPickSelector (selector);
+#endif
 }

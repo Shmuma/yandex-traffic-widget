@@ -84,6 +84,8 @@ private:
     QMaemo5ValueButton *_intervalButton;
     QCheckBox *_wifiUpdate, *_gsmUpdate;
 
+    void initUpdateInterval (QBoxLayout *layout);
+
 protected:
     virtual void saveSettings ();
 

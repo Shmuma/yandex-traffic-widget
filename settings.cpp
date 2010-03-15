@@ -16,12 +16,16 @@ void Settings::load ()
 
     _regionID = settings.value ("region", _regionID).toString ();
 
-    _checks[C_Light] = settings.value ("checks/light", _checks[C_Light]).toBool ();
-    _checks[C_Rank] = settings.value ("checks/rank", _checks[C_Rank]).toBool ();
-    _checks[C_Time] = settings.value ("checks/time", _checks[C_Time]).toBool ();
-    _checks[C_Hint] = settings.value ("checks/hint", _checks[C_Hint]).toBool ();
+    _checks[C_ShowLight] = settings.value ("checks/light", _checks[C_ShowLight]).toBool ();
+    _checks[C_ShowRank] = settings.value ("checks/rank", _checks[C_ShowRank]).toBool ();
+    _checks[C_ShowTime] = settings.value ("checks/time", _checks[C_ShowTime]).toBool ();
+    _checks[C_ShowHint] = settings.value ("checks/hint", _checks[C_ShowHint]).toBool ();
+    _checks[C_UpdateOnWiFi] = settings.value ("checks/updateOnWifi", _checks[C_UpdateOnWiFi]).toBool ();
+    _checks[C_UpdateOnGSM] = settings.value ("checks/updateOnGSM", _checks[C_UpdateOnGSM]).toBool ();
 
     loadCities (&settings);
+
+    _updateIntervalIndex = minutes2IntervalIndex (settings.value ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex)).toInt ());
 }
 
 
@@ -31,10 +35,14 @@ void Settings::save ()
 
     settings.setValue ("region", _regionID);
 
-    settings.setValue ("checks/light", _checks[C_Light]);
-    settings.setValue ("checks/rank", _checks[C_Rank]);
-    settings.setValue ("checks/time", _checks[C_Time]);
-    settings.setValue ("checks/hint", _checks[C_Hint]);
+    settings.setValue ("checks/light", _checks[C_ShowLight]);
+    settings.setValue ("checks/rank", _checks[C_ShowRank]);
+    settings.setValue ("checks/time", _checks[C_ShowTime]);
+    settings.setValue ("checks/hint", _checks[C_ShowHint]);
+    settings.setValue ("checks/updateOnWifi", _checks[C_UpdateOnWiFi]);
+    settings.setValue ("checks/updateOnGSM", _checks[C_UpdateOnGSM]);
+
+    settings.setValue ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex));
 
     saveCities (&settings);
 }
@@ -85,7 +93,58 @@ void Settings::makeDefault ()
     _cities["11162"] = tr ("Ekaterinburg");
     _cities["11079"] = tr ("N.Novgorod");
 
-    setCheck (C_Light, true);
-    setCheck (C_Rank, true);
-    setCheck (C_Hint, true);
+    setCheck (C_ShowLight, true);
+    setCheck (C_ShowRank, true);
+    setCheck (C_ShowHint, true);
+
+    setCheck (C_UpdateOnWiFi, true);
+
+    _updateIntervalIndex = 3;
+}
+
+
+QStringList Settings::updateIntervals () const
+{
+    QStringList res;
+
+    res.append (tr ("Never"));
+    res.append (tr ("1 min"));
+    res.append (tr ("2 min"));
+    res.append (tr ("5 min"));
+    res.append (tr ("15 min"));
+    res.append (tr ("30 min"));
+
+    return res;
+}
+
+
+int Settings::intervalIndex2Minutes (int index) const
+{
+    int int2min[] = { -1, 1, 2, 5, 15, 30 };
+
+    if (index < 0 || sizeof (int2min) / sizeof (int2min[0]))
+        return -1;
+
+    return int2min[index];
+}
+
+
+int Settings::minutes2IntervalIndex (int minutes) const
+{
+    switch (minutes) {
+        case -1:
+            return 0;
+        case 1:
+            return 1;
+        case 2:
+            return 2;
+        case 5:
+            return 3;
+        case 15:
+            return 4;
+        case 30:
+            return 5;
+        default:
+            return 0;
+    }
 }

@@ -27,7 +27,7 @@ MainWidget::MainWidget ()
     layout->addWidget (_label);
     setLayout (layout);
 
-    _light->setVisible (_settings->check (Settings::C_Light));
+    _light->setVisible (_settings->check (Settings::C_ShowLight));
 
     updateSize ();
 
@@ -79,20 +79,20 @@ void MainWidget::trafficUpdated ()
         bool first = true;
         _light->setColor (info.color ());
 
-        if (_settings->check (Settings::C_Rank)) {
+        if (_settings->check (Settings::C_ShowRank)) {
             data.append (QString::number (info.level ()));
             data.append (info.level () > 1 ? tr (" points") : tr (" point"));
             first = false;
         }
 
-        if (_settings->check (Settings::C_Time)) {
+        if (_settings->check (Settings::C_ShowTime)) {
             if (!first)
                 data.append (", ");
             data.append (info.localtime ());
             first = false;
         }
 
-        if (_settings->check (Settings::C_Hint)) {
+        if (_settings->check (Settings::C_ShowHint)) {
             if (!first)
                 data.append ("\n");
             data.append (info.hint ());
@@ -119,7 +119,7 @@ void MainWidget::settingsDialog ()
     dlg.exec ();
 
     // Handle settings
-    _light->setVisible (_settings->check (Settings::C_Light));
+    _light->setVisible (_settings->check (Settings::C_ShowLight));
 
     updateSize ();
     trafficUpdated ();
@@ -130,14 +130,14 @@ void MainWidget::updateSize ()
 {
     QSize minSize (0, 80);
 
-    if (_settings->check (Settings::C_Light))
+    if (_settings->check (Settings::C_ShowLight))
         minSize += QSize (80, 0);
-    if (_settings->check (Settings::C_Hint))
+    if (_settings->check (Settings::C_ShowHint))
         minSize += QSize (270, 0);
     else {
-        if (_settings->check (Settings::C_Time))
+        if (_settings->check (Settings::C_ShowTime))
             minSize += QSize (75, 0);
-        if (_settings->check (Settings::C_Rank))
+        if (_settings->check (Settings::C_ShowRank))
             minSize += QSize (75, 0);
     }
 

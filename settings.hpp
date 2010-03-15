@@ -9,21 +9,27 @@ class Settings : public QObject
     Q_OBJECT
 public:
     enum check_t {
-        C_Light = 0,
-        C_Rank,
-        C_Time,
-        C_Hint,
+        C_ShowLight = 0,
+        C_ShowRank,
+        C_ShowTime,
+        C_ShowHint,
+        C_UpdateOnWiFi,
+        C_UpdateOnGSM,
     };
 
 private:
     QString _regionID;          // region ID which will be displayed
     QMap<QString, QString> _cities;
     QMap<check_t, bool> _checks;
+    int _updateIntervalIndex;
 
     void makeDefault ();
 
     void loadCities (QSettings *settings);
     void saveCities (QSettings *settings);
+
+    int intervalIndex2Minutes (int index) const;
+    int minutes2IntervalIndex (int minutes) const;
 
 public:
     Settings ();
@@ -44,7 +50,15 @@ public:
     { return _checks[entry]; };
 
     void setCheck (check_t entry, bool val)
-    { _checks[entry] = val; }
+    { _checks[entry] = val; };
+
+    QStringList updateIntervals () const;
+
+    int getUpdateIntervalIndex () const
+    { return _updateIntervalIndex; };
+
+    void setUpdateIntervalIndex (int index)
+    { _updateIntervalIndex = index; };
 };
 
 
