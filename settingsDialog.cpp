@@ -20,22 +20,63 @@ SettingsDialog::SettingsDialog (Settings *settings)
 
     QVBoxLayout *layout = new QVBoxLayout (this);
 
-    displayButton = new QMaemo5ValueButton (tr ("Display"), this);
-    layout->addWidget (displayButton);
-    updateButton = new QMaemo5ValueButton (tr ("Update"), this);
-    layout->addWidget (updateButton);
-    alertsButton = new QMaemo5ValueButton (tr ("Alerts"), this);
-    layout->addWidget (alertsButton);
+    _displayButton = new QMaemo5ValueButton (tr ("Display"), this);
+    layout->addWidget (_displayButton);
+    _updateButton = new QMaemo5ValueButton (tr ("Update"), this);
+    layout->addWidget (_updateButton);
+    _alertsButton = new QMaemo5ValueButton (tr ("Alerts"), this);
+    layout->addWidget (_alertsButton);
 
-    connect (displayButton, SIGNAL (clicked ()), SLOT (displayClicked ()));
+    connect (_displayButton, SIGNAL (clicked ()), SLOT (displayClicked ()));
+    connect (_updateButton, SIGNAL (clicked ()), SLOT (updateClicked ()));
 }
 
 
 void SettingsDialog::displayClicked ()
 {
     DisplaySettingsDialog dlg (_settings);
-
     dlg.exec ();
+}
+
+
+void SettingsDialog::updateClicked ()
+{
+    UpdateSettingsDialog dlg (_settings);
+    dlg.exec ();
+}
+
+
+// --------------------------------------------------
+// BaseSettingsDialog
+// --------------------------------------------------
+BaseSettingsDialog::BaseSettingsDialog (Settings *settings)
+    : QDialog (),
+      _settings (settings),
+      _layout (new QVBoxLayout)
+{
+    QHBoxLayout *layout = new QHBoxLayout (this);
+    QVBoxLayout *right_layout = new QVBoxLayout ();
+
+    // Right side
+    _saveButton = new QPushButton (tr ("Save"), this);
+    connect (_saveButton, SIGNAL (clicked ()), SLOT (saveClicked ()));
+
+    right_layout->addStretch ();
+    right_layout->addWidget (_saveButton);
+
+    // Path them together
+    layout->addLayout (_layout);
+    layout->addLayout (right_layout);
+
+    // Left side would be initialized later
+}
+
+
+void BaseSettingsDialog::saveClicked ()
+{
+    saveSettings ();
+    _settings->save ();
+    accept ();
 }
 
 
@@ -43,37 +84,20 @@ void SettingsDialog::displayClicked ()
 // DisplaySettingsDialog
 // --------------------------------------------------
 DisplaySettingsDialog::DisplaySettingsDialog (Settings *settings)
-    : QDialog (0),
-      _settings (settings)
+    : BaseSettingsDialog (settings)
 {
     setWindowTitle (tr ("Display settings"));
     setMinimumSize (300, 400);
 
-    QHBoxLayout *layout = new QHBoxLayout (this);
-    QVBoxLayout *left_layout = new QVBoxLayout ();
-    QVBoxLayout *right_layout = new QVBoxLayout ();
-
-    // Right side
-    _saveButton = new QPushButton (tr ("&Save"), this);
-    connect (_saveButton, SIGNAL (clicked ()), SLOT (saveClicked ()));
-
-    right_layout->addStretch ();
-    right_layout->addWidget (_saveButton);
-
-    // Left side
-    initCities (left_layout);
-    initChecks (left_layout);
-
-    // Pack them together
-    layout->addLayout (left_layout);
-    layout->addLayout (right_layout);
+    initCities (layout ());
+    initChecks (layout ());
 }
 
 
 void DisplaySettingsDialog::initCities (QBoxLayout *layout)
 {
     _cities = new QListWidget (this);
-    QMap<QString, QString> cities_map = _settings->cities ();
+    QMap<QString, QString> cities_map = settings ()->cities ();
     QMap<QString, QString>::iterator it = cities_map.begin ();
 
     // Populate list with cities
@@ -81,7 +105,7 @@ void DisplaySettingsDialog::initCities (QBoxLayout *layout)
         QListWidgetItem *item = new QListWidgetItem (it.value (), _cities);
 
         item->setData (Qt::UserRole, QVariant (it.key ()));
-        if (it.key () == _settings->regionID ())
+        if (it.key () == settings ()->regionID ())
             _cities->setCurrentItem (item);
         it++;
     }
@@ -95,13 +119,13 @@ void DisplaySettingsDialog::initChecks (QBoxLayout *layout)
     QGridLayout *grid = new QGridLayout;
 
     _showLight = new QCheckBox ("Light", this);
-    _showLight->setChecked (_settings->check (Settings::C_Light));
+    _showLight->setChecked (settings ()->check (Settings::C_Light));
     _showRank = new QCheckBox ("Rank", this);
-    _showRank->setChecked (_settings->check (Settings::C_Rank));
+    _showRank->setChecked (settings ()->check (Settings::C_Rank));
     _showTime = new QCheckBox ("Time", this);
-    _showTime->setChecked (_settings->check (Settings::C_Time));
+    _showTime->setChecked (settings ()->check (Settings::C_Time));
     _showHint = new QCheckBox ("Hint", this);
-    _showHint->setChecked (_settings->check (Settings::C_Hint));
+    _showHint->setChecked (settings ()->check (Settings::C_Hint));
 
     grid->addWidget (_showLight, 0, 0);
     grid->addWidget (_showRank, 0, 1);
@@ -112,17 +136,30 @@ void DisplaySettingsDialog::initChecks (QBoxLayout *layout)
 }
 
 
-void DisplaySettingsDialog::saveClicked ()
+void DisplaySettingsDialog::saveSettings ()
 {
     QListWidgetItem *cur = _cities->currentItem ();
 
     if (cur)
-        _settings->setRegionID (cur->data (Qt::UserRole).toString ());
+        settings ()->setRegionID (cur->data (Qt::UserRole).toString ());
 
-    _settings->setCheck (Settings::C_Light, _showLight->isChecked ());
-    _settings->setCheck (Settings::C_Rank,  _showRank->isChecked ());
-    _settings->setCheck (Settings::C_Time,  _showTime->isChecked ());
-    _settings->setCheck (Settings::C_Hint,  _showHint->isChecked ());
-    _settings->save ();
-    accept ();
+    settings ()->setCheck (Settings::C_Light, _showLight->isChecked ());
+    settings ()->setCheck (Settings::C_Rank,  _showRank->isChecked ());
+    settings ()->setCheck (Settings::C_Time,  _showTime->isChecked ());
+    settings ()->setCheck (Settings::C_Hint,  _showHint->isChecked ());
+}
+
+
+// --------------------------------------------------
+// UpdateSettingsDialog
+// --------------------------------------------------
+UpdateSettingsDialog::UpdateSettingsDialog (Settings *settings)
+    : BaseSettingsDialog (settings)
+{
+    setWindowTitle (tr ("Update settings"));
+}
+
+
+void UpdateSettingsDialog::saveSettings ()
+{
 }

@@ -17,38 +17,78 @@ class SettingsDialog : public QDialog
     Q_OBJECT
 
 private:
-    QMaemo5ValueButton *displayButton;
-    QMaemo5ValueButton *updateButton;
-    QMaemo5ValueButton *alertsButton;
+    QMaemo5ValueButton *_displayButton;
+    QMaemo5ValueButton *_updateButton;
+    QMaemo5ValueButton *_alertsButton;
 
     Settings *_settings;
 
 protected slots:
     void displayClicked ();
+    void updateClicked ();
 
 public:
     SettingsDialog (Settings *settings);
 };
 
 
-class DisplaySettingsDialog : public QDialog
+class BaseSettingsDialog : public QDialog
 {
     Q_OBJECT
-
 private:
     Settings *_settings;
-    QListWidget *_cities;
-    QCheckBox *_showLight, *_showRank, *_showTime, *_showHint;
+    QVBoxLayout *_layout;
     QPushButton *_saveButton;
-
-    void initCities (QBoxLayout *layout);
-    void initChecks (QBoxLayout *layout);
 
 protected slots:
     void saveClicked ();
 
+protected:
+    Settings* settings () const
+    { return _settings; };
+
+    QVBoxLayout* layout () const
+    { return _layout; };
+
+    virtual void saveSettings () = 0;
+
+public:
+    BaseSettingsDialog (Settings *settings);
+};
+
+
+class DisplaySettingsDialog : public BaseSettingsDialog
+{
+    Q_OBJECT
+
+private:
+    QListWidget *_cities;
+    QCheckBox *_showLight, *_showRank, *_showTime, *_showHint;
+
+    void initCities (QBoxLayout *layout);
+    void initChecks (QBoxLayout *layout);
+
+protected:
+    virtual void saveSettings ();
+
 public:
     DisplaySettingsDialog (Settings *settings);
+};
+
+
+class UpdateSettingsDialog : public BaseSettingsDialog
+{
+    Q_OBJECT
+
+private:
+    QMaemo5ValueButton *_intervalButton;
+    QCheckBox *_wifiUpdate, *_gsmUpdate;
+
+protected:
+    virtual void saveSettings ();
+
+public:
+    UpdateSettingsDialog (Settings *settings);
 };
 
 
