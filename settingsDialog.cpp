@@ -21,8 +21,12 @@ SettingsDialog::SettingsDialog (Settings *settings)
     QVBoxLayout *layout = new QVBoxLayout (this);
 
     _displayButton = new QMaemo5ValueButton (tr ("Display"), this);
+    _displayButton->setValueLayout (QMaemo5ValueButton::ValueUnderText);
+    updateDisplayButtonValue ();
     layout->addWidget (_displayButton);
     _updateButton = new QMaemo5ValueButton (tr ("Update"), this);
+    _updateButton->setValueLayout (QMaemo5ValueButton::ValueUnderText);
+    updateUpdateButtonValue ();
     layout->addWidget (_updateButton);
 
     connect (_displayButton, SIGNAL (clicked ()), SLOT (displayClicked ()));
@@ -34,6 +38,7 @@ void SettingsDialog::displayClicked ()
 {
     DisplaySettingsDialog dlg (_settings);
     dlg.exec ();
+    updateDisplayButtonValue ();
 }
 
 
@@ -41,6 +46,43 @@ void SettingsDialog::updateClicked ()
 {
     UpdateSettingsDialog dlg (_settings);
     dlg.exec ();
+    updateUpdateButtonValue ();
+}
+
+
+void SettingsDialog::updateDisplayButtonValue ()
+{
+    QString val;
+    QStringList list;
+
+    val = tr ("City: ") + _settings->cities ()[_settings->regionID ()] + ", " + tr ("Data: ");
+
+    if (_settings->check (Settings::C_ShowLight))
+        list.append (tr ("lights"));
+    if (_settings->check (Settings::C_ShowRank))
+        list.append (tr ("rank"));
+    if (_settings->check (Settings::C_ShowTime))
+        list.append (tr ("time"));
+    if (_settings->check (Settings::C_ShowHint))
+        list.append (tr ("hint"));
+
+    _displayButton->setValueText (val + list.join (", "));
+}
+
+
+void SettingsDialog::updateUpdateButtonValue ()
+{
+    QStringList list, intervals = _settings->updateIntervals ();
+    QString val;
+
+    val = tr ("Interval: ") + intervals[_settings->getUpdateIntervalIndex ()] + ", " + tr ("Update via: ");
+
+    if (_settings->check (Settings::C_UpdateOnWiFi))
+        list.append (tr ("WiFi"));
+    if (_settings->check (Settings::C_UpdateOnGSM))
+        list.append (tr ("GSM"));
+
+    _updateButton->setValueText (val + list.join (", "));
 }
 
 
@@ -160,9 +202,9 @@ UpdateSettingsDialog::UpdateSettingsDialog (Settings *_settings)
 {
     setWindowTitle (tr ("Update settings"));
 
-    _wifiUpdate = new QCheckBox (tr ("Update on WiFi connection"), this);
+    _wifiUpdate = new QCheckBox (tr ("Update via WiFi"), this);
     _wifiUpdate->setChecked (settings ()->check (Settings::C_UpdateOnWiFi));
-    _gsmUpdate  = new QCheckBox (tr ("Update on GSM connection"), this);
+    _gsmUpdate  = new QCheckBox (tr ("Update via GSM"), this);
     _gsmUpdate->setChecked (settings ()->check (Settings::C_UpdateOnGSM));
 
     initUpdateInterval (layout ());

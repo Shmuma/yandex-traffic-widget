@@ -22,6 +22,9 @@ private:
 
     Settings *_settings;
 
+    void updateDisplayButtonValue ();
+    void updateUpdateButtonValue ();
+
 protected slots:
     void displayClicked ();
     void updateClicked ();
