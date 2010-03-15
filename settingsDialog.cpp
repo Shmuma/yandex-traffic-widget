@@ -24,8 +24,6 @@ SettingsDialog::SettingsDialog (Settings *settings)
     layout->addWidget (_displayButton);
     _updateButton = new QMaemo5ValueButton (tr ("Update"), this);
     layout->addWidget (_updateButton);
-    _alertsButton = new QMaemo5ValueButton (tr ("Alerts"), this);
-    layout->addWidget (_alertsButton);
 
     connect (_displayButton, SIGNAL (clicked ()), SLOT (displayClicked ()));
     connect (_updateButton, SIGNAL (clicked ()), SLOT (updateClicked ()));

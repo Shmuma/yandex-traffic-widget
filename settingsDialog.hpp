@@ -19,7 +19,6 @@ class SettingsDialog : public QDialog
 private:
     QMaemo5ValueButton *_displayButton;
     QMaemo5ValueButton *_updateButton;
-    QMaemo5ValueButton *_alertsButton;
 
     Settings *_settings;
 
