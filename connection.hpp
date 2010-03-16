@@ -39,6 +39,8 @@ public:
     bool isConnected () const
     { return _connected; };
 
+    bool checkConnection (bool allow_gsm, bool allow_wifi);
+
     network_type_t network_type () const
     { return _net_type; };
 

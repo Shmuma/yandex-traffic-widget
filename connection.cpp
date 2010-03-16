@@ -81,3 +81,21 @@ void ConnectionChecker::updateState (bool new_state, const QString& net_type)
         type_changed (_net_type);
     }
 }
+
+
+bool ConnectionChecker::checkConnection (bool allow_gsm, bool allow_wifi)
+{
+    if (!_connected)
+        return false;
+
+    switch (_net_type) {
+        case Net_None:
+            return true;
+        case Net_WLAN:
+            return allow_wifi;
+        case Net_GSM:
+            return allow_gsm;
+        default:
+            return true;
+    }
+}

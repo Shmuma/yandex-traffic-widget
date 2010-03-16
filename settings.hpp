@@ -59,6 +59,9 @@ public:
 
     void setUpdateIntervalIndex (int index)
     { _updateIntervalIndex = index; };
+
+    int updateInterval () const
+    { return intervalIndex2Minutes (_updateIntervalIndex); };
 };
 
 

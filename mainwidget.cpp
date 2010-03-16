@@ -2,6 +2,7 @@
 
 #include "mainwidget.hpp"
 #include "settingsDialog.hpp"
+#include "connection.hpp"
 
 
 // --------------------------------------------------
@@ -15,6 +16,7 @@ MainWidget::MainWidget ()
 #endif
     _light = new TrafficLight (this);
     _label = new QLabel (this);
+    _timer = new QTimer (this);
 
     _label->setAlignment (Qt::AlignHCenter | Qt::AlignVCenter);
 
@@ -27,14 +29,10 @@ MainWidget::MainWidget ()
     layout->addWidget (_label);
     setLayout (layout);
 
-    _light->setVisible (_settings->check (Settings::C_ShowLight));
-
-    updateSize ();
+    applySettings ();
 
     connect (_traffic, SIGNAL (updated ()), SLOT (trafficUpdated ()));
-
-    // every 5 minutes (TODO, make option)
-    startTimer (5*60*1000);
+    connect (_timer, SIGNAL (timeout ()), SLOT (updateDate ()));
 
     updateData ();
 }
@@ -60,12 +58,6 @@ void MainWidget::paintEvent(QPaintEvent *event)
     p.end ();
 
     QWidget::paintEvent (event);
-}
-
-
-void MainWidget::timerEvent (QTimerEvent *)
-{
-    updateData ();
 }
 
 
@@ -109,8 +101,15 @@ void MainWidget::trafficUpdated ()
 
 void MainWidget::updateData ()
 {
-    // Here we need to check for internet connection
-    _traffic->update ();
+    bool update = true;
+
+#if CHECK_FOR_CONNECTION
+    update = ConnectionChecker::instance ()->checkConnection (_settings->check (Settings::C_UpdateOnGSM),
+                                                              _settings->check (Settings::C_UpdateOnWiFi));
+#endif
+
+    if (update)
+        _traffic->update ();
 }
 
 
@@ -120,10 +119,7 @@ void MainWidget::settingsDialog ()
 
     dlg.exec ();
 
-    // Handle settings
-    _light->setVisible (_settings->check (Settings::C_ShowLight));
-
-    updateSize ();
+    applySettings ();
     trafficUpdated ();
 }
 
@@ -144,4 +140,18 @@ void MainWidget::updateSize ()
     }
 
     setFixedSize (minSize);
+}
+
+
+
+void MainWidget::applySettings ()
+{
+    _light->setVisible (_settings->check (Settings::C_ShowLight));
+
+    updateSize ();
+
+    if (_settings->updateInterval () < 0)
+        _timer->stop ();
+    else
+        _timer->setInterval (1000 * 60 * _settings->updateInterval ());
 }

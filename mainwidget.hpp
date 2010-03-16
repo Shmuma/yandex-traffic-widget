@@ -21,19 +21,22 @@ private:
     TrafficLight* _light;
     QLabel* _label;
 
+    // Other stuff
+    QTimer *_timer;
+
 public:
     MainWidget ();
     virtual ~MainWidget ();
 
 public slots:
     void settingsDialog ();
+    void updateData ();
 
 protected:
     void paintEvent (QPaintEvent *event);
-    void timerEvent (QTimerEvent *event);
 
-    void updateData ();
     void updateSize ();
+    void applySettings ();
 
 protected slots:
     void trafficUpdated ();
