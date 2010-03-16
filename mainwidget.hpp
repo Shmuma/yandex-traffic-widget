@@ -34,6 +34,7 @@ public slots:
 
 protected:
     void paintEvent (QPaintEvent *event);
+    void mousePressEvent (QMouseEvent *event);
 
     void updateSize ();
     void applySettings ();

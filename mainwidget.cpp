@@ -155,3 +155,22 @@ void MainWidget::applySettings ()
     else
         _timer->setInterval (1000 * 60 * _settings->updateInterval ());
 }
+
+
+void MainWidget::mousePressEvent (QMouseEvent *event)
+{
+    QMenu menu;
+    QAction *settingsAction, *updateAction, *todo;
+
+    settingsAction = menu.addAction (tr ("Settings"));
+    updateAction = menu.addAction (tr ("Update"));
+
+    todo = menu.exec (event->pos ());
+    if (!todo)
+        return;
+
+    if (todo == settingsAction)
+        settingsDialog ();
+    if (todo == updateAction)
+        _traffic->update ();
+}
