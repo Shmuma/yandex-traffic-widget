@@ -43,16 +43,31 @@ void ConnectionChecker::requestState ()
 
 void ConnectionChecker::stateSignal (const QDBusMessage& msg)
 {
-    unsigned int status = msg.arguments ().value (7).value<unsigned int>();
+    if (msg.arguments ().count () == 8) {
+        unsigned int status = msg.arguments ().value (7).value<unsigned int>();
 
-    updateState (status == ICD_STATE_CONNECTED);
+        updateState (status == ICD_STATE_CONNECTED, msg.arguments ().value (3).toString ());
+    }
 }
 
 
-void ConnectionChecker::updateState (bool new_state)
+void ConnectionChecker::updateState (bool new_state, const QString& net_type)
 {
+    network_type_t new_net = Net_None;
+
     if (new_state != _connected) {
         _connected = new_state;
         emit connected (_connected);
+    }
+
+    if (_connected) {
+        if (net_type.startsWith ("WLAN"))
+            new_net = Net_WLAN;
+        else if (net_type.startsWith ("GPRS") || net_type.startsWith ("DUN_GSM"))
+            new_net = Net_GSM;
+        if (new_net != _net_type) {
+            _net_type = new_net;
+            type_changed (_net_type);
+        }
     }
 }

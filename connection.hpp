@@ -10,15 +10,24 @@ class ConnectionChecker : public QObject
 {
     Q_OBJECT
 
+public:
+    enum network_type_t {
+        Net_None,
+        Net_WLAN,
+        Net_GSM,
+    };
+
 private:
     bool _connected;
+    network_type_t _net_type;
+
     QDBusConnection _bus;
     QDBusInterface *_itf;
 
 protected:
     ConnectionChecker ();
 
-    void updateState (bool new_state);
+    void updateState (bool new_state, const QString& net_type = QString ());
 
 protected slots:
     void stateSignal (const QDBusMessage& msg);
@@ -29,10 +38,14 @@ public:
     bool isConnected () const
     { return _connected; };
 
+    network_type_t network_type () const
+    { return _net_type; };
+
     void requestState ();
 
 signals:
     void connected (bool active);
+    void type_changed (ConnectionChecker::network_type_t type);
 };
 
 #endif // __CONNECTION_H__
