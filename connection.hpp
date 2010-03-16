@@ -20,6 +20,7 @@ public:
 private:
     bool _connected;
     network_type_t _net_type;
+    int _conn_counter;
 
     QDBusConnection _bus;
     QDBusInterface *_itf;
