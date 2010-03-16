@@ -72,7 +72,7 @@ void MainWidget::timerEvent (QTimerEvent *)
 
 void MainWidget::trafficUpdated ()
 {
-    ExtendedTrafficInfo info = _traffic->lookup_ext ("1");
+    ExtendedTrafficInfo info = _traffic->lookup_ext (_settings->regionID ());
 
     if (info.valid ()) {
         QString data;
@@ -100,8 +100,10 @@ void MainWidget::trafficUpdated ()
 
         _label->setText (data);
     }
-    else
+    else {
         _light->setColor (ExtendedTrafficInfo::Unknown);
+        _label->setText (tr ("No data"));
+    }
 }
 
 

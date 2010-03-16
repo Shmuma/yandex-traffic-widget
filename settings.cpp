@@ -89,9 +89,9 @@ void Settings::makeDefault ()
     _regionID = "1";            // Default city
 
     _cities["1"] = tr ("Moscow");
-    _cities["10174"] = tr ("Kiev");
+    _cities["10174"] = tr ("St.Petersburg");
+    _cities["20544"] = tr ("Kiev");
     _cities["11162"] = tr ("Ekaterinburg");
-    _cities["11079"] = tr ("N.Novgorod");
 
     setCheck (C_ShowLight, true);
     setCheck (C_ShowRank, true);
