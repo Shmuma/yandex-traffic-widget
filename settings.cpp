@@ -122,7 +122,7 @@ int Settings::intervalIndex2Minutes (int index) const
 {
     int int2min[] = { -1, 1, 2, 5, 15, 30 };
 
-    if (index < 0 || sizeof (int2min) / sizeof (int2min[0]))
+    if (index < 0 || sizeof (int2min) / sizeof (int2min[0]) <= index)
         return -1;
 
     return int2min[index];
