@@ -106,6 +106,8 @@ void MainWidget::updateData ()
 #if CHECK_FOR_CONNECTION
     update = ConnectionChecker::instance ()->checkConnection (_settings->check (Settings::C_UpdateOnGSM),
                                                               _settings->check (Settings::C_UpdateOnWiFi));
+    if (!_settings->check (Settings::C_UpdateWhenLocked))
+        update &= !DeviceState::instance ()->locked ();
 #endif
 
     if (update)

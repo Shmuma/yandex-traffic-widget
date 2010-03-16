@@ -15,6 +15,7 @@ public:
         C_ShowHint,
         C_UpdateOnWiFi,
         C_UpdateOnGSM,
+        C_UpdateWhenLocked,
     };
 
 private:

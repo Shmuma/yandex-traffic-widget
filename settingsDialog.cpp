@@ -206,11 +206,14 @@ UpdateSettingsDialog::UpdateSettingsDialog (Settings *_settings)
     _wifiUpdate->setChecked (settings ()->check (Settings::C_UpdateOnWiFi));
     _gsmUpdate  = new QCheckBox (tr ("Update via GSM"), this);
     _gsmUpdate->setChecked (settings ()->check (Settings::C_UpdateOnGSM));
+    _lockedUpdate  = new QCheckBox (tr ("Update when device locked"), this);
+    _lockedUpdate->setChecked (settings ()->check (Settings::C_UpdateWhenLocked));
 
     initUpdateInterval (layout ());
 
     layout ()->addWidget (_wifiUpdate);
     layout ()->addWidget (_gsmUpdate);
+    layout ()->addWidget (_lockedUpdate);
 }
 
 
@@ -224,6 +227,7 @@ void UpdateSettingsDialog::saveSettings ()
 #endif
     settings ()->setCheck (Settings::C_UpdateOnWiFi, _wifiUpdate->isChecked ());
     settings ()->setCheck (Settings::C_UpdateOnGSM,  _gsmUpdate->isChecked ());
+    settings ()->setCheck (Settings::C_UpdateWhenLocked,  _lockedUpdate->isChecked ());
 }
 
 

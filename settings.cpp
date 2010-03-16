@@ -22,6 +22,7 @@ void Settings::load ()
     _checks[C_ShowHint] = settings.value ("checks/hint", _checks[C_ShowHint]).toBool ();
     _checks[C_UpdateOnWiFi] = settings.value ("checks/updateOnWifi", _checks[C_UpdateOnWiFi]).toBool ();
     _checks[C_UpdateOnGSM] = settings.value ("checks/updateOnGSM", _checks[C_UpdateOnGSM]).toBool ();
+    _checks[C_UpdateWhenLocked] = settings.value ("checks/updateWhenLocked", _checks[C_UpdateWhenLocked]).toBool ();
 
     loadCities (&settings);
 
@@ -41,6 +42,7 @@ void Settings::save ()
     settings.setValue ("checks/hint", _checks[C_ShowHint]);
     settings.setValue ("checks/updateOnWifi", _checks[C_UpdateOnWiFi]);
     settings.setValue ("checks/updateOnGSM", _checks[C_UpdateOnGSM]);
+    settings.setValue ("checks/updateWhenLocked", _checks[C_UpdateWhenLocked]);
 
     settings.setValue ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex));
 
@@ -98,6 +100,8 @@ void Settings::makeDefault ()
     setCheck (C_ShowHint, true);
 
     setCheck (C_UpdateOnWiFi, true);
+
+    setCheck (C_UpdateWhenLocked, true);
 
     _updateIntervalIndex = 3;
 }

@@ -84,7 +84,7 @@ class UpdateSettingsDialog : public BaseSettingsDialog
 
 private:
     QMaemo5ValueButton *_intervalButton;
-    QCheckBox *_wifiUpdate, *_gsmUpdate;
+    QCheckBox *_wifiUpdate, *_gsmUpdate, *_lockedUpdate;
 
     void initUpdateInterval (QBoxLayout *layout);
 
