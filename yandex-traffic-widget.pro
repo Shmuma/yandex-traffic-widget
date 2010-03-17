@@ -14,3 +14,6 @@ desktop.files = yandex-traffic-widget.desktop
 
 target.path = /usr/lib/hildon-desktop
 INSTALLS += target desktop
+
+
+TRANSLATIONS = yandex-traffic-widget_ru.ts
