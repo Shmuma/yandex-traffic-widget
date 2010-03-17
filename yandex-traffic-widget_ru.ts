@@ -151,6 +151,14 @@
         <source>GSM</source>
         <translation>GSM</translation>
     </message>
+    <message>
+        <source>Update when locked</source>
+        <translation>Обновлять когда телефон неактивен</translation>
+    </message>
+    <message>
+        <source>Not update when locked</source>
+        <translation>Не обновлять когда телефон неактивен</translation>
+    </message>
 </context>
 <context>
     <name>UpdateSettingsDialog</name>
