@@ -55,9 +55,6 @@ private:
 
     void makeDefault ();
 
-    void loadCities (QSettings *settings);
-    void saveCities (QSettings *settings);
-
     int intervalIndex2Minutes (int index) const;
     int minutes2IntervalIndex (int minutes) const;
 

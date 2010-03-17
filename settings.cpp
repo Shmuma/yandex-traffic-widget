@@ -24,9 +24,6 @@ void Settings::load ()
     _checks[C_UpdateOnGSM] = settings.value ("checks/updateOnGSM", _checks[C_UpdateOnGSM]).toBool ();
     _checks[C_UpdateWhenLocked] = settings.value ("checks/updateWhenLocked", _checks[C_UpdateWhenLocked]).toBool ();
 
-    // Do we really need to cache cities?
-    // loadCities (&settings);
-
     _updateIntervalIndex = minutes2IntervalIndex (settings.value ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex)).toInt ());
 
     _langIndex = settings.value ("langIndex", _langIndex).toInt ();
@@ -52,44 +49,6 @@ void Settings::save ()
     settings.setValue ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex));
 
     settings.setValue ("langIndex", _langIndex);
-
-//    saveCities (&settings);
-}
-
-
-void Settings::loadCities (QSettings *settings)
-{
-    QMap<QString, QVariant> v;
-    QMap<QString, QVariant>::const_iterator it;
-
-    v = settings->value ("cities", v).toMap ();
-
-    if (v.size () == 0)
-        return;
-
-    it = v.begin ();
-    _cities.clear ();
-
-    while (it != v.end ()) {
-        _cities[it.key ()] = it.value ().toString ();
-        it++;
-    }
-}
-
-
-void Settings::saveCities (QSettings *settings)
-{
-    QMap<QString, QVariant> v;
-    QMap<QString, QString>::const_iterator it;
-
-    it = _cities.begin ();
-
-    while (it != _cities.end ()) {
-        v[it.key ()] = it.value ();
-        it++;
-    }
-
-    settings->setValue ("cities", v);
 }
 
 
