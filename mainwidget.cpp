@@ -32,7 +32,7 @@ MainWidget::MainWidget ()
     applySettings ();
 
     connect (_traffic, SIGNAL (updated ()), SLOT (trafficUpdated ()));
-    connect (_timer, SIGNAL (timeout ()), SLOT (updateDate ()));
+    connect (_timer, SIGNAL (timeout ()), SLOT (updateData ()));
 
     updateData ();
 }
@@ -73,7 +73,7 @@ void MainWidget::trafficUpdated ()
 
         if (_settings->check (Settings::C_ShowRank)) {
             data.append (QString::number (info.level ()));
-            data.append (info.level () > 1 ? tr (" points") : tr (" point"));
+            data.append (tr ("%n point(s)", "", info.level ()));
             first = false;
         }
 

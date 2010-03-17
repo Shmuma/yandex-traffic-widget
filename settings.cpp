@@ -24,7 +24,8 @@ void Settings::load ()
     _checks[C_UpdateOnGSM] = settings.value ("checks/updateOnGSM", _checks[C_UpdateOnGSM]).toBool ();
     _checks[C_UpdateWhenLocked] = settings.value ("checks/updateWhenLocked", _checks[C_UpdateWhenLocked]).toBool ();
 
-    loadCities (&settings);
+    // Do we really need to cache cities?
+    // loadCities (&settings);
 
     _updateIntervalIndex = minutes2IntervalIndex (settings.value ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex)).toInt ());
 }
@@ -46,7 +47,7 @@ void Settings::save ()
 
     settings.setValue ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex));
 
-    saveCities (&settings);
+//    saveCities (&settings);
 }
 
 

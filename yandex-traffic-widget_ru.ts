@@ -35,11 +35,11 @@
     <name>MainWidget</name>
     <message>
         <source> points</source>
-        <translation>баллов</translation>
+        <translation type="obsolete">баллов</translation>
     </message>
     <message>
         <source> point</source>
-        <translation>балл</translation>
+        <translation type="obsolete">балл</translation>
     </message>
     <message>
         <source>No data</source>
@@ -52,6 +52,14 @@
     <message>
         <source>Update</source>
         <translation>Обновить</translation>
+    </message>
+    <message numerus="yes">
+        <source>%n point(s)</source>
+        <translation>
+            <numerusform>%n балл</numerusform>
+            <numerusform>%n балла</numerusform>
+            <numerusform>%n баллов</numerusform>
+        </translation>
     </message>
 </context>
 <context>
@@ -113,11 +121,11 @@
     </message>
     <message>
         <source>City: </source>
-        <translation>Город: </translation>
+        <translation type="obsolete">Город: </translation>
     </message>
     <message>
         <source>Data: </source>
-        <translation>Данные: </translation>
+        <translation type="obsolete">Данные: </translation>
     </message>
     <message>
         <source>lights</source>
@@ -137,11 +145,11 @@
     </message>
     <message>
         <source>Interval: </source>
-        <translation>Интервал: </translation>
+        <translation type="obsolete">Интервал: </translation>
     </message>
     <message>
         <source>Update via: </source>
-        <translation>Обновлять через: </translation>
+        <translation type="obsolete">Обновлять через: </translation>
     </message>
     <message>
         <source>WiFi</source>
@@ -158,6 +166,22 @@
     <message>
         <source>Not update when locked</source>
         <translation>Не обновлять когда телефон неактивен</translation>
+    </message>
+    <message>
+        <source>City:</source>
+        <translation>Город:</translation>
+    </message>
+    <message>
+        <source>Display:</source>
+        <translation>Отображать:</translation>
+    </message>
+    <message>
+        <source>Interval:</source>
+        <translation>Интервал:</translation>
+    </message>
+    <message>
+        <source>Update via:</source>
+        <translation>Обновлять через:</translation>
     </message>
 </context>
 <context>

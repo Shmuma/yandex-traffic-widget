@@ -55,7 +55,7 @@ void SettingsDialog::updateDisplayButtonValue ()
     QString val;
     QStringList list;
 
-    val = tr ("City: ") + _settings->cities ()[_settings->regionID ()] + ", " + tr ("Data: ");
+    val = tr ("City:") + " " + _settings->cities ()[_settings->regionID ()] + ", " + tr ("Display:") + " ";
 
     if (_settings->check (Settings::C_ShowLight))
         list.append (tr ("lights"));
@@ -75,7 +75,7 @@ void SettingsDialog::updateUpdateButtonValue ()
     QStringList list, intervals = _settings->updateIntervals ();
     QString val;
 
-    val = tr ("Interval: ") + intervals[_settings->getUpdateIntervalIndex ()] + ", " + tr ("Update via: ");
+    val = tr ("Interval:") + " " + intervals[_settings->getUpdateIntervalIndex ()] + ", " + tr ("Update via:") + " ";
 
     if (_settings->check (Settings::C_UpdateOnWiFi))
         list.append (tr ("WiFi"));
