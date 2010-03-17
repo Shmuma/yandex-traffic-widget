@@ -72,7 +72,6 @@ void MainWidget::trafficUpdated ()
         _light->setColor (info.color ());
 
         if (_settings->check (Settings::C_ShowRank)) {
-            data.append (QString::number (info.level ()));
             data.append (tr ("%n point(s)", "", info.level ()));
             first = false;
         }

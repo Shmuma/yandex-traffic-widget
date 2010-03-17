@@ -161,11 +161,11 @@
     </message>
     <message>
         <source>Update when locked</source>
-        <translation>Обновлять когда телефон неактивен</translation>
+        <translation>Обновлять при неактивности</translation>
     </message>
     <message>
         <source>Not update when locked</source>
-        <translation>Не обновлять когда телефон неактивен</translation>
+        <translation>Не обновлять при неактивности</translation>
     </message>
     <message>
         <source>City:</source>
@@ -173,7 +173,7 @@
     </message>
     <message>
         <source>Display:</source>
-        <translation>Отображать:</translation>
+        <translation>Показывать:</translation>
     </message>
     <message>
         <source>Interval:</source>
