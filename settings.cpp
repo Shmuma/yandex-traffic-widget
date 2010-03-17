@@ -2,6 +2,17 @@
 #include <settings.hpp>
 
 
+static Settings* _settings;
+
+
+Settings* Settings::instance ()
+{
+    if (!_settings)
+        _settings = new Settings;
+    return _settings;
+}
+
+
 Settings::Settings ()
 {
     load ();

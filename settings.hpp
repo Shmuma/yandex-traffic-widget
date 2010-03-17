@@ -58,8 +58,9 @@ private:
     int intervalIndex2Minutes (int index) const;
     int minutes2IntervalIndex (int minutes) const;
 
-public:
     Settings ();
+public:
+    static Settings* instance ();
 
     void load ();
     void save ();

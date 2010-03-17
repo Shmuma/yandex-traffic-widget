@@ -24,7 +24,7 @@ MainWidget::MainWidget ()
 
     _traffic = new Traffic;
     _regions = new RegionsTable;
-    _settings = new Settings;
+    _settings = Settings::instance ();
 
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget (_light);
