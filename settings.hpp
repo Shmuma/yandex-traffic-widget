@@ -4,6 +4,32 @@
 #include <QtCore>
 
 
+class Language
+{
+private:
+    QString _title;
+    QString _alias;
+
+public:
+    Language (const QString &alias, const QString &title)
+        : _title (title),
+          _alias (alias)
+    {};
+
+    QString title () const
+    { return _title; };
+
+    QString alias () const
+    { return _alias; };
+
+    bool operator== (const Language &lang) const
+    { return _title == lang._title && _alias == lang._alias; };
+
+    bool operator!= (const Language &lang) const
+    { return !(*this == lang); };
+};
+
+
 class Settings : public QObject
 {
     Q_OBJECT
@@ -23,6 +49,9 @@ private:
     QMap<QString, QString> _cities;
     QMap<check_t, bool> _checks;
     int _updateIntervalIndex;
+
+    QList<Language> _langs;
+    int _langIndex;
 
     void makeDefault ();
 
@@ -63,6 +92,16 @@ public:
 
     int updateInterval () const
     { return intervalIndex2Minutes (_updateIntervalIndex); };
+
+    // Language settings
+    const Language& language () const
+    { return _langs[_langIndex]; };
+
+    const QList<Language>& languages () const
+    { return _langs; };
+
+    void setLanguage (const Language &lang)
+    { _langIndex = _langs.indexOf (lang); };
 };
 
 

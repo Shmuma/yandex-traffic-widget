@@ -19,15 +19,18 @@ class SettingsDialog : public QDialog
 private:
     QMaemo5ValueButton *_displayButton;
     QMaemo5ValueButton *_updateButton;
+    QMaemo5ValueButton *_languageButton;
 
     Settings *_settings;
 
     void updateDisplayButtonValue ();
     void updateUpdateButtonValue ();
+    void createLanguageButton (QBoxLayout *layout);
 
 protected slots:
     void displayClicked ();
     void updateClicked ();
+    void languageChanged (const QString&);
 
 public:
     SettingsDialog (Settings *settings);

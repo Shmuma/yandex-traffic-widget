@@ -29,8 +29,35 @@ SettingsDialog::SettingsDialog (Settings *settings)
     updateUpdateButtonValue ();
     layout->addWidget (_updateButton);
 
+    createLanguageButton (layout);
+
     connect (_displayButton, SIGNAL (clicked ()), SLOT (displayClicked ()));
     connect (_updateButton, SIGNAL (clicked ()), SLOT (updateClicked ()));
+}
+
+
+void SettingsDialog::createLanguageButton (QBoxLayout *layout)
+{
+    _languageButton = new QMaemo5ValueButton (tr ("Language"), this);
+    layout->addWidget (_languageButton);
+
+#ifdef Q_WS_MAEMO_5
+    QMaemo5ListPickSelector *selector = new QMaemo5ListPickSelector;
+    QStandardItemModel *model = new QStandardItemModel (0, 1);
+    QList<Language>::const_iterator it = _settings->languages ().begin ();
+
+    while (it != _settings->languages ().end ()) {
+        QStandardItem *item = new QStandardItem (it->title ());
+        item->setData (it->alias ());
+        model->appendRow (item);
+        it++;
+    }
+
+    selector->setModel (model);
+    selector->setCurrentIndex (_settings->languages ().indexOf (_settings->language ()));
+
+    _languageButton->setPickSelector (selector);
+#endif
 }
 
 
@@ -47,6 +74,21 @@ void SettingsDialog::updateClicked ()
     UpdateSettingsDialog dlg (_settings);
     dlg.exec ();
     updateUpdateButtonValue ();
+}
+
+
+void SettingsDialog::languageChanged (const QString&)
+{
+#ifdef Q_WS_MAEMO_5
+    QMaemo5ListPickSelector *model = static_cast<QMaemo5ListPickSelector*> (_languageButton->pickSelector ());
+
+    if (!model)
+        return;
+
+    const Language &lang = _settings->languages ()[model->currentIndex ()];
+    if (lang != _settings->language ())
+        _settings->setLanguage (lang);
+#endif
 }
 
 

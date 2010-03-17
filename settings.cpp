@@ -105,6 +105,12 @@ void Settings::makeDefault ()
     setCheck (C_UpdateWhenLocked, true);
 
     _updateIntervalIndex = 3;
+
+    // languages
+    _langIndex = 0;
+    _langs.append (Language (QString (""), tr ("System")));
+    _langs.append (Language (QString ("en"), tr ("English")));
+    _langs.append (Language (QString ("ru"), tr ("Russian")));
 }
 
 
