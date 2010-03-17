@@ -98,8 +98,7 @@ public:
     const QList<Language>& languages () const
     { return _langs; };
 
-    void setLanguage (const Language &lang)
-    { _langIndex = _langs.indexOf (lang); };
+    void setLanguageIndex (int index);
 };
 
 

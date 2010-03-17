@@ -37,9 +37,7 @@ void Settings::load ()
 
     _updateIntervalIndex = minutes2IntervalIndex (settings.value ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex)).toInt ());
 
-    _langIndex = settings.value ("langIndex", _langIndex).toInt ();
-    if (_langIndex < 0 || _langIndex >= _langs.count ())
-        _langIndex = 0;
+    setLanguageIndex (settings.value ("langIndex", _langIndex).toInt ());
 }
 
 
@@ -83,10 +81,10 @@ void Settings::makeDefault ()
     _updateIntervalIndex = 3;
 
     // languages
-    _langIndex = 0;
     _langs.append (Language (QString (""),   tr ("System")));
     _langs.append (Language (QString ("en"), tr ("English")));
     _langs.append (Language (QString ("ru"), tr ("Russian")));
+    setLanguageIndex (0);
 }
 
 
@@ -134,4 +132,13 @@ int Settings::minutes2IntervalIndex (int minutes) const
         default:
             return 0;
     }
+}
+
+
+void Settings::setLanguageIndex (int index)
+{
+    if (index < 0 || index >= _langs.count ())
+        _langIndex = 0;
+    else
+        _langIndex = index;
 }

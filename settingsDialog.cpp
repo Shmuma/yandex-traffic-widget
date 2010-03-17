@@ -57,6 +57,8 @@ void SettingsDialog::createLanguageButton (QBoxLayout *layout)
     selector->setCurrentIndex (_settings->languages ().indexOf (_settings->language ()));
 
     _languageButton->setPickSelector (selector);
+
+    connect (selector, SIGNAL (selected (const QString&)), SLOT (languageChanged (const QString&)));
 #endif
 }
 
@@ -85,9 +87,8 @@ void SettingsDialog::languageChanged (const QString&)
     if (!model)
         return;
 
-    const Language &lang = _settings->languages ()[model->currentIndex ()];
-    if (lang != _settings->language ())
-        _settings->setLanguage (lang);
+    _settings->setLanguageIndex (model->currentIndex ());
+    _settings->save ();
 #endif
 }
 
