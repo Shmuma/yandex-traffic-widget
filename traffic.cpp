@@ -134,12 +134,9 @@ void Traffic::update ()
 
 void Traffic::fetchDone (const QByteArray& data)
 {
-    printf ("Got %d bytes of data\n", data.size ());
     // parse data got
     if (parse_traffic_data (QString::fromUtf8 (data.data ())))
         updated ();
-    else
-        printf ("Parse failed\n");
 }
 
 
@@ -176,7 +173,6 @@ bool Traffic::parse_traffic_data (const QString& xml)
         e = n.toElement ();
         if (!e.isNull () && e.tagName () == "region") {
             s = e.attribute ("id");
-            printf ("Process region %s\n", s.toUtf8 ().data ());
             try {
 		// Check that it is an extended traffic info
                 if (!e.firstChildElement ("level").isNull ()) {
@@ -191,7 +187,6 @@ bool Traffic::parse_traffic_data (const QString& xml)
                 }
             }
             catch (const QString& msg) {
-                printf ("Region %s parse failed: %s\n", s.toUtf8 ().data (), msg.toUtf8 ().data ());
             }
         }
         n = n.nextSibling ();

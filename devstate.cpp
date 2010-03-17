@@ -54,7 +54,6 @@ void DeviceState::tkLockMessage (const QDBusMessage &msg)
 
     if (msg.arguments ().count () > 0) {
         s = msg.arguments ().value (0).toString ();
-        printf ("Reply = %s\n", s.toUtf8 ().data ());
         setLocked (s == QString (MCE_TK_LOCKED));
     }
 #endif
