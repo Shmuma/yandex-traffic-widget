@@ -41,6 +41,7 @@ protected:
 
 protected slots:
     void trafficUpdated ();
+    void deviceLockChanged (bool locked);
 };
 
 #endif /* __MAINWIDGET_H__ */

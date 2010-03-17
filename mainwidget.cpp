@@ -3,6 +3,8 @@
 #include "mainwidget.hpp"
 #include "settingsDialog.hpp"
 #include "connection.hpp"
+#include "devstate.hpp"
+#include "settings.hpp"
 
 
 // --------------------------------------------------
@@ -33,6 +35,7 @@ MainWidget::MainWidget ()
 
     connect (_traffic, SIGNAL (updated ()), SLOT (trafficUpdated ()));
     connect (_timer, SIGNAL (timeout ()), SLOT (updateData ()));
+    connect (DeviceState::instance (), SIGNAL (lockChanged (bool)), SLOT (deviceLockChanged (bool)));
 
     updateData ();
 }
@@ -174,4 +177,12 @@ void MainWidget::mousePressEvent (QMouseEvent *event)
         settingsDialog ();
     if (todo == updateAction)
         _traffic->update ();
+}
+
+
+void MainWidget::deviceLockChanged (bool locked)
+{
+    if (!_settings->check (Settings::C_UpdateWhenLocked))
+        if (!locked)
+            updateData ();
 }
