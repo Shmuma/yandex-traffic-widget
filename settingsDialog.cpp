@@ -82,7 +82,14 @@ void SettingsDialog::updateUpdateButtonValue ()
     if (_settings->check (Settings::C_UpdateOnGSM))
         list.append (tr ("GSM"));
 
-    _updateButton->setValueText (val + list.join (", "));
+    val += list.join (", ");
+
+    if (_settings->check (Settings::C_UpdateWhenLocked))
+        val += ", " + tr ("Update when locked");
+    else
+        val += ", " + tr ("Not update when locked");
+
+    _updateButton->setValueText (val);
 }
 
 
