@@ -4,6 +4,7 @@
 #include <QtCore>
 
 
+
 class Language
 {
 private:
@@ -53,12 +54,17 @@ private:
     QList<Language> _langs;
     int _langIndex;
 
+    QTranslator *_ts;
+
     void makeDefault ();
 
     int intervalIndex2Minutes (int index) const;
     int minutes2IntervalIndex (int minutes) const;
 
     Settings ();
+
+    void refreshTranslations ();
+
 public:
     static Settings* instance ();
 
@@ -71,8 +77,10 @@ public:
     void setRegionID (const QString &id)
     { _regionID = id; };
 
-    QMap<QString, QString> cities () const
-    { return _cities; };
+    QStringList regionIDs () const
+    { return _cities.keys (); };
+
+    QString regionName (const QString &id) const;
 
     bool check (check_t entry) const
     { return _checks[entry]; };
@@ -99,6 +107,9 @@ public:
     { return _langs; };
 
     void setLanguageIndex (int index);
+
+signals:
+    void translationsUpdated ();
 };
 
 

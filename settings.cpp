@@ -1,6 +1,8 @@
 #include <QtCore>
 #include <settings.hpp>
 
+#include "globals.hpp"
+
 
 static Settings* _settings;
 
@@ -14,6 +16,7 @@ Settings* Settings::instance ()
 
 
 Settings::Settings ()
+    : _ts (NULL)
 {
     load ();
 }
@@ -61,6 +64,7 @@ void Settings::save ()
 }
 
 
+// This routine called before any translations loaded, so strings must be translated explicitly.
 void Settings::makeDefault ()
 {
     _regionID = "1";            // Default city
@@ -141,4 +145,35 @@ void Settings::setLanguageIndex (int index)
         _langIndex = 0;
     else
         _langIndex = index;
+
+    // load settings
+    if (_ts) {
+        QCoreApplication::removeTranslator (_ts);
+        _ts = NULL;
+    }
+
+    QString alias = _langs[_langIndex].alias ();
+    QString fileName = QString (APPLICATION_NAME) + "_";
+
+    _ts = new QTranslator;
+
+    if (alias.isEmpty ())
+        fileName += QLocale::system ().name ();
+    else
+        fileName += alias;
+
+    if (_ts->load (fileName, TRANSLATION_PATH)) {
+        QCoreApplication::installTranslator (_ts);
+        translationsUpdated ();
+    }
+    else {
+        delete _ts;
+        _ts = NULL;
+    }
+}
+
+
+QString Settings::regionName (const QString &id) const
+{
+    return Settings::tr (_cities[id].toUtf8 ());
 }

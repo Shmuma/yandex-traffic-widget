@@ -98,7 +98,7 @@ void SettingsDialog::updateDisplayButtonValue ()
     QString val;
     QStringList list;
 
-    val = tr ("City:") + " " + _settings->cities ()[_settings->regionID ()] + ", " + tr ("Display:") + " ";
+    val = tr ("City:") + " " + _settings->regionName (_settings->regionID ()) + ", " + tr ("Display:") + " ";
 
     if (_settings->check (Settings::C_ShowLight))
         list.append (tr ("lights"));
@@ -191,15 +191,15 @@ DisplaySettingsDialog::DisplaySettingsDialog (Settings *_settings)
 void DisplaySettingsDialog::initCities (QBoxLayout *layout)
 {
     _cities = new QListWidget (this);
-    QMap<QString, QString> cities_map = settings ()->cities ();
-    QMap<QString, QString>::iterator it = cities_map.begin ();
+    QStringList regions = settings ()->regionIDs ();
+    QStringList::const_iterator it = regions.begin ();
 
     // Populate list with cities
-    while (it != cities_map.end ()) {
-        QListWidgetItem *item = new QListWidgetItem (it.value (), _cities);
+    while (it != regions.end ()) {
+        QListWidgetItem *item = new QListWidgetItem (settings()->regionName (*it), _cities);
 
-        item->setData (Qt::UserRole, QVariant (it.key ()));
-        if (it.key () == settings ()->regionID ())
+        item->setData (Qt::UserRole, QVariant (*it));
+        if (*it == settings ()->regionID ())
             _cities->setCurrentItem (item);
         it++;
     }
