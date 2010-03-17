@@ -6,4 +6,5 @@ X-Path=yandex-traffic-widget
 X-Multiple-Instances=false
 X-home-applet-minwidth=100
 X-home-applet-minheight=72
-Name[en_US]=Yandex.Traffic widget
+Name[en_US]=Yandex.Traffic
+Name[ru_RU]=Яндекс.Пробки
