@@ -38,7 +38,7 @@ SettingsDialog::SettingsDialog (Settings *settings)
 
 void SettingsDialog::createLanguageButton (QBoxLayout *layout)
 {
-    _languageButton = new QMaemo5ValueButton (tr ("Language"), this);
+    _languageButton = new QMaemo5ValueButton (tr ("Interface language"), this);
     layout->addWidget (_languageButton);
 
 #ifdef Q_WS_MAEMO_5

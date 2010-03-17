@@ -17,8 +17,7 @@ public:
           _alias (alias)
     {};
 
-    QString title () const
-    { return _title; };
+    QString title () const;
 
     QString alias () const
     { return _alias; };

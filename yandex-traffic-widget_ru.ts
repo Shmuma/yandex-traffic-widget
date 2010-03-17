@@ -104,6 +104,18 @@
         <source>30 min</source>
         <translation>30 мин</translation>
     </message>
+    <message>
+        <source>System</source>
+        <translation>Системный</translation>
+    </message>
+    <message>
+        <source>English</source>
+        <translation>Английский</translation>
+    </message>
+    <message>
+        <source>Russian</source>
+        <translation>Русский</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>
@@ -182,6 +194,14 @@
     <message>
         <source>Update via:</source>
         <translation>Обновлять через:</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation type="obsolete">Язык интерфейса</translation>
+    </message>
+    <message>
+        <source>Interface language</source>
+        <translation>Язык интерфейса</translation>
     </message>
 </context>
 <context>
