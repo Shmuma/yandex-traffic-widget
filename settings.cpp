@@ -28,6 +28,10 @@ void Settings::load ()
     // loadCities (&settings);
 
     _updateIntervalIndex = minutes2IntervalIndex (settings.value ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex)).toInt ());
+
+    _langIndex = settings.value ("langIndex", _langIndex).toInt ();
+    if (_langIndex < 0 || _langIndex >= _langs.count ())
+        _langIndex = 0;
 }
 
 
@@ -46,6 +50,8 @@ void Settings::save ()
     settings.setValue ("checks/updateWhenLocked", _checks[C_UpdateWhenLocked]);
 
     settings.setValue ("updateInterval", intervalIndex2Minutes (_updateIntervalIndex));
+
+    settings.setValue ("langIndex", _langIndex);
 
 //    saveCities (&settings);
 }
@@ -108,7 +114,7 @@ void Settings::makeDefault ()
 
     // languages
     _langIndex = 0;
-    _langs.append (Language (QString (""), tr ("System")));
+    _langs.append (Language (QString (""),   tr ("System")));
     _langs.append (Language (QString ("en"), tr ("English")));
     _langs.append (Language (QString ("ru"), tr ("Russian")));
 }
