@@ -1,0 +1,19 @@
+Source: yandex-traffic-widget
+Section: user/desktop
+Priority: optional
+Maintainer: Max Lapan <max.lapan@gmail.com>
+Uploaders: Harald Fernengel <harald.fernengel@nokia.com>
+Build-Depends: libqt4-maemo5-dev, libhildon1-dev, libhildondesktop1-dev 
+Standards-Version: 3.7.3
+
+Package: yandex-traffic-widget
+Architecture: any
+Depends: libqt4-maemo5-core (>= 4.6.1), libqt4-maemo5-gui (>= 4.6.1), qt4-maemo5-homescreen-loader
+Description: Desktop widget which shows traffic information provided by Yandex
+ At the moment widget can display one of four citites (Moscow, Kiev,
+ St.Petersburg and Ekaterinburg) overview traffic information.
+
+ You can tune amount of information displayed, refresh interval and connection
+ used to refresh data (GSM of WiFi).
+ .
+ First public release of Yandex.Traffic widget.
