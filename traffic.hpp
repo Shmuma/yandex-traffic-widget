@@ -43,6 +43,8 @@ public:
 
     QDateTime ts () const
     { return _ts; };
+
+    virtual void dump ();
 };
 
 
@@ -81,6 +83,8 @@ public:
 
     ExtendedTrafficInfo::light_color color () const
     { return _color; };
+
+    virtual void dump ();
 };
 
 

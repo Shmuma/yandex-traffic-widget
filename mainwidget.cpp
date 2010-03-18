@@ -74,6 +74,8 @@ void MainWidget::trafficUpdated ()
     if (info.valid ()) {
         QString data;
         bool first = true;
+        Log::instance ()->add ("trafficUpdated, info valid");
+        info.dump ();
         _light->setColor (info.color ());
 
         if (_settings->check (Settings::C_ShowRank)) {
@@ -97,6 +99,7 @@ void MainWidget::trafficUpdated ()
         _label->setText (data);
     }
     else {
+        Log::instance ()->add ("trafficUpdated, but info not valid");
         _light->setColor (ExtendedTrafficInfo::Unknown);
         _label->setText (tr ("No data"));
     }

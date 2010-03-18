@@ -2,6 +2,7 @@
 #include <QtXml>
 
 #include "traffic.hpp"
+#include "log.hpp"
 
 
 // --------------------------------------------------
@@ -82,6 +83,12 @@ QDateTime TrafficInfo::getTSNode (const QDomElement& elem, const char* node) thr
 }
 
 
+void TrafficInfo::dump ()
+{
+    Log::instance ()->add (QString ("TrafficInfo (%1): time = %2").arg (_valid ? "valid" : "not valid").arg (_localtime));
+}
+
+
 // --------------------------------------------------
 // ExtendedTrafficInfo
 // --------------------------------------------------
@@ -107,6 +114,13 @@ ExtendedTrafficInfo::ExtendedTrafficInfo (const QDomElement& elem) throw (const 
         throw "Color is unknown";
 
     setValid (true);
+}
+
+
+void ExtendedTrafficInfo::dump ()
+{
+    TrafficInfo::dump ();
+    Log::instance ()->add (QString ("ExtTrafficInfo: level = %1, hint = %2").arg (_level).arg (_hint));
 }
 
 
