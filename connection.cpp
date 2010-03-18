@@ -55,6 +55,11 @@ void ConnectionChecker::stateSignal (const QDBusMessage& msg)
     if (state == ICD_STATE_DISCONNECTED)
         _conn_counter--;
 
+    if (_conn_counter > 1)
+        _conn_counter = 1;
+    if (_conn_counter < 0)
+        _conn_counter = 0;
+
     Log::instance ()->add (QString ("stateSignal: state = %1, net = %2, counter = %3").arg (state).arg (net).arg (_conn_counter));
 
     if (state == ICD_STATE_CONNECTED || !_conn_counter)
