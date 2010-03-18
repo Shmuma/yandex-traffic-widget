@@ -1,5 +1,6 @@
 #include <QtGui>
 
+#include "globals.hpp"
 #include "mainwidget.hpp"
 #include "settingsDialog.hpp"
 #include "connection.hpp"

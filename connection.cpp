@@ -2,7 +2,7 @@
 
 #include "connection.hpp"
 #include "icd2_light.h"
-
+#include "log.hpp"
 
 static ConnectionChecker *_instance = NULL;
 
@@ -55,6 +55,8 @@ void ConnectionChecker::stateSignal (const QDBusMessage& msg)
     if (state == ICD_STATE_DISCONNECTED)
         _conn_counter--;
 
+    Log::instance ()->add (QString ("stateSignal: state = %1, net = %2, counter = %3").arg (state).arg (net).arg (_conn_counter));
+
     if (state == ICD_STATE_CONNECTED || !_conn_counter)
         updateState (state == ICD_STATE_CONNECTED, net);
 }
@@ -63,6 +65,8 @@ void ConnectionChecker::stateSignal (const QDBusMessage& msg)
 void ConnectionChecker::updateState (bool new_state, const QString& net_type)
 {
     network_type_t new_net = Net_None;
+
+    Log::instance ()->add (QString ("ConnectionChecker::updateState (%1, %2)").arg (new_state ? "connected" : "not connected").arg (net_type));
 
     if (new_state != _connected) {
         _connected = new_state;
@@ -90,12 +94,16 @@ bool ConnectionChecker::checkConnection (bool allow_gsm, bool allow_wifi)
 
     switch (_net_type) {
         case Net_None:
+            Log::instance ()->add ("checkConnection: Net_None, allow");
             return true;
         case Net_WLAN:
+            Log::instance ()->add (QString ("checkConnection: Net_WLAN, allow = %1").arg (allow_wifi ? "true" : "false"));
             return allow_wifi;
         case Net_GSM:
+            Log::instance ()->add (QString ("checkConnection: Net_GSM, allow = %1").arg (allow_gsm ? "true" : "false"));
             return allow_gsm;
         default:
+            Log::instance ()->add ("checkConnection: unknown, allow");
             return true;
     }
 }
