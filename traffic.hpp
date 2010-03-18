@@ -105,6 +105,9 @@ private:
 private slots:
     void fetchDone (const QByteArray& data);
 
+protected slots:
+    void connectionChanged (bool active);
+
 signals:
     void updated ();
 

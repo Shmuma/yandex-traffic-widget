@@ -24,6 +24,7 @@ public:
 
     bool busy () const;
     void fetch (const QString& url);
+    void reset ();
 };
 
 

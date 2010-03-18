@@ -3,6 +3,7 @@
 
 #include "traffic.hpp"
 #include "log.hpp"
+#include "connection.hpp"
 
 
 // --------------------------------------------------
@@ -132,16 +133,21 @@ Traffic::Traffic ()
 {
     connect (&_fetcher, SIGNAL (done (const QByteArray&)),
              SLOT (fetchDone (const QByteArray&)));
+    connect (ConnectionChecker::instance (), SIGNAL (connected (bool)), SLOT (connectionChanged (bool)));
 }
+
 
 // Perform asyncronous refresh of traffic information. If another update
 // request is in progress, new is discarded. If update request finished
 // successfully, updated() signal called.
 void Traffic::update ()
 {
-    if (_fetcher.busy ())
+    if (_fetcher.busy ()) {
+        Log::instance ()->add ("Traffic::update: fetcher is busy");
         return;
+    }
 
+    Log::instance ()->add ("Traffic::update: Request status download");
     _fetcher.fetch ("http://trf.maps.yandex.net/trf/stat.xml");
 }
 
@@ -149,8 +155,12 @@ void Traffic::update ()
 void Traffic::fetchDone (const QByteArray& data)
 {
     // parse data got
-    if (parse_traffic_data (QString::fromUtf8 (data.data ())))
+    if (parse_traffic_data (QString::fromUtf8 (data.data ()))) {
+        Log::instance ()->add ("Traffic::fetchDone: data parsed successfully");
         updated ();
+    }
+    else
+        Log::instance ()->add ("Traffic::fetchDone: data parse error");
 }
 
 
@@ -233,4 +243,11 @@ ExtendedTrafficInfo Traffic::lookup_ext (const QString &id) const
         return ExtendedTrafficInfo ();
     else
         return it.value ();
+}
+
+
+void Traffic::connectionChanged (bool active)
+{
+    if (!active)
+        _fetcher.reset ();
 }

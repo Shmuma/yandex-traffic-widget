@@ -39,3 +39,12 @@ void HttpFetcher::requestDone (bool err)
     _buffer.close ();
     _buffer.setBuffer (NULL);
 }
+
+
+void HttpFetcher::reset ()
+{
+    if (!busy ())
+        return;
+
+    _http.abort ();
+}
