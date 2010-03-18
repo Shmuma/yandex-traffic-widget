@@ -6,6 +6,7 @@
 #include "devstate.hpp"
 #include "settings.hpp"
 #include "log.hpp"
+#include "menudialog.hpp"
 
 
 // --------------------------------------------------
@@ -177,24 +178,25 @@ void MainWidget::applySettings ()
 }
 
 
-void MainWidget::mousePressEvent (QMouseEvent *event)
+bool MainWidget::event (QEvent *event)
 {
-    QMenu menu;
-    QAction *settingsAction, *updateAction, *todo;
+    if (event->type () != QEvent::WindowActivate)
+        return QWidget::event (event);
 
-    Log::instance ()->add (QString ("mousePressEvent at %1,%2").arg (event->pos ().x ()).arg (event->pos ().y ()));
+    MenuDialog menu (tr ("Yandex.Traffic"));
 
-    settingsAction = menu.addAction (tr ("Settings"));
-    updateAction = menu.addAction (tr ("Update"));
+    menu.addEntry (tr ("Settings")).addEntry (tr ("Update"));
 
-    todo = menu.exec (event->pos ());
-    if (!todo)
-        return;
+    switch (menu.run ()) {
+        case 0:
+            settingsDialog ();
+            break;
+        case 1:
+            _traffic->update ();
+            break;
+    }
 
-    if (todo == settingsAction)
-        settingsDialog ();
-    if (todo == updateAction)
-        _traffic->update ();
+    return QWidget::event (event);
 }
 
 

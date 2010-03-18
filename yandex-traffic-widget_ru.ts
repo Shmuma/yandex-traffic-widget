@@ -61,6 +61,10 @@
             <numerusform>%n баллов</numerusform>
         </translation>
     </message>
+    <message>
+        <source>Yandex.Traffic</source>
+        <translation>Яндекс.Пробки</translation>
+    </message>
 </context>
 <context>
     <name>Settings</name>

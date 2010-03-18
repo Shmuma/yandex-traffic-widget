@@ -1,5 +1,5 @@
-HEADERS += $$PWD/mainwidget.hpp $$PWD/light.hpp $$PWD/settingsDialog.hpp
-SOURCES += $$PWD/mainwidget.cpp $$PWD/light.cpp $$PWD/settingsDialog.cpp
+HEADERS += $$PWD/mainwidget.hpp $$PWD/light.hpp $$PWD/settingsDialog.hpp $$PWD/menudialog.hpp
+SOURCES += $$PWD/mainwidget.cpp $$PWD/light.cpp $$PWD/settingsDialog.cpp $$PWD/menudialog.cpp
 
 !maemo5 {
         HEADERS += $$PWD/QtMaemo5Adapters.hpp
