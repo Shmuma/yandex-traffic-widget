@@ -3,7 +3,7 @@ Section: user/desktop
 Priority: optional
 Maintainer: Max Lapan <max.lapan@gmail.com>
 Uploaders: Harald Fernengel <harald.fernengel@nokia.com>
-Build-Depends: libqt4-maemo5-dev, libhildon1-dev, libhildondesktop1-dev 
+Build-Depends: libqt4-maemo5-dev, libhildon1-dev, libhildondesktop1-dev, mce-dev
 Standards-Version: 3.7.3
 
 Package: yandex-traffic-widget
