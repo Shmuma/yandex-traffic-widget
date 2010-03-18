@@ -1,3 +1,10 @@
+yandex-traffic-widget (0.1-2) unstable; urgency=low
+
+  * Fixed bug with hanging connections
+  * Add extra debug messages to log.
+
+ -- Max Lapan <max.lapan@gmail.com>  Thu, 18 Mar 2010 20:11:58 +0300
+
 yandex-traffic-widget (0.1-1) unstable; urgency=low
 
   * First public version
