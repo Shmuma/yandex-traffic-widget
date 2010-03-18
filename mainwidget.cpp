@@ -5,6 +5,7 @@
 #include "connection.hpp"
 #include "devstate.hpp"
 #include "settings.hpp"
+#include "log.hpp"
 
 
 // --------------------------------------------------
@@ -64,7 +65,6 @@ void MainWidget::paintEvent(QPaintEvent *event)
 }
 
 
-
 void MainWidget::trafficUpdated ()
 {
     ExtendedTrafficInfo info = _traffic->lookup_ext (_settings->regionID ());
@@ -105,15 +105,24 @@ void MainWidget::updateData ()
 {
     bool update = true;
 
+    Log::instance ()->add ("updateData called");
+
 #if CHECK_FOR_CONNECTION
     update = ConnectionChecker::instance ()->checkConnection (_settings->check (Settings::C_UpdateOnGSM),
                                                               _settings->check (Settings::C_UpdateOnWiFi));
-    if (!_settings->check (Settings::C_UpdateWhenLocked))
+    Log::instance ()->add (QString ("checkConnection returned %1").arg (update ? "true" : "false"));
+    if (!_settings->check (Settings::C_UpdateWhenLocked)) {
+        Log::instance ()->add ("Check for device state");
         update &= !DeviceState::instance ()->locked ();
+    }
 #endif
 
-    if (update)
+    if (update) {
+        Log::instance ()->add ("Perform update");
         _traffic->update ();
+    }
+    else
+        Log::instance ()->add ("Update not performed");
 }
 
 
@@ -154,10 +163,17 @@ void MainWidget::applySettings ()
 
     updateSize ();
 
-    if (_settings->updateInterval () < 0)
+    Log::instance ()->add (QString ("applySettings: updateInterval is %1").arg (_settings->updateInterval ()));
+
+    if (_settings->updateInterval () < 0) {
         _timer->stop ();
-    else
+        Log::instance ()->add ("Timer disabled");
+    }
+    else {
         _timer->setInterval (1000 * 60 * _settings->updateInterval ());
+        _timer->start ();
+        Log::instance ()->add (QString ("Timer interval set to %1 ms").arg (1000 * 60 * _settings->updateInterval ()));
+    }
 }
 
 
@@ -165,6 +181,8 @@ void MainWidget::mousePressEvent (QMouseEvent *event)
 {
     QMenu menu;
     QAction *settingsAction, *updateAction, *todo;
+
+    Log::instance ()->add (QString ("mousePressEvent at %1,%2").arg (event->pos ().x ()).arg (event->pos ().y ()));
 
     settingsAction = menu.addAction (tr ("Settings"));
     updateAction = menu.addAction (tr ("Update"));
