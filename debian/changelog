@@ -1,3 +1,10 @@
+yandex-traffic-widget (0.1-3) unstable; urgency=low
+
+  * Fix bug when refresh stopped after some time.
+  * Extended refresh intervals with 1 hr and 2 hrs.
+
+ -- Max Lapan <max.lapan@gmail.com>  Fri, 19 Mar 2010 14:39:00 +0300
+
 yandex-traffic-widget (0.1-2) unstable; urgency=low
 
   * Fixed bug with hanging connections
