@@ -13,15 +13,12 @@ HttpFetcher::HttpFetcher ()
 }
 
 
-bool HttpFetcher::busy () const
-{
-    return _http.currentId () != 0;
-}
-
-
 void HttpFetcher::fetch (const QString& url)
 {
     QUrl u (url);
+
+    if (_http.currentId () != )
+        _http.abort ();
 
     if (u.isValid ()) {
         _http.setHost (u.host ());
@@ -40,11 +37,3 @@ void HttpFetcher::requestDone (bool err)
     _buffer.setBuffer (NULL);
 }
 
-
-void HttpFetcher::reset ()
-{
-    if (!busy ())
-        return;
-
-    _http.abort ();
-}

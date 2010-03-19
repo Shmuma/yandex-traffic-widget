@@ -3,7 +3,6 @@
 
 #include "traffic.hpp"
 #include "log.hpp"
-#include "connection.hpp"
 
 
 // --------------------------------------------------
@@ -133,7 +132,6 @@ Traffic::Traffic ()
 {
     connect (&_fetcher, SIGNAL (done (const QByteArray&)),
              SLOT (fetchDone (const QByteArray&)));
-    connect (ConnectionChecker::instance (), SIGNAL (connected (bool)), SLOT (connectionChanged (bool)));
 }
 
 
@@ -142,11 +140,6 @@ Traffic::Traffic ()
 // successfully, updated() signal called.
 void Traffic::update ()
 {
-    if (_fetcher.busy ()) {
-        Log::instance ()->add ("Traffic::update: fetcher is busy");
-        return;
-    }
-
     Log::instance ()->add ("Traffic::update: Request status download");
     _fetcher.fetch ("http://trf.maps.yandex.net/trf/stat.xml");
 }
@@ -245,9 +238,3 @@ ExtendedTrafficInfo Traffic::lookup_ext (const QString &id) const
         return it.value ();
 }
 
-
-void Traffic::connectionChanged (bool active)
-{
-    if (!active)
-        _fetcher.reset ();
-}
