@@ -90,23 +90,23 @@
     </message>
     <message>
         <source>1 min</source>
-        <translation>1 мин</translation>
+        <translation type="obsolete">1 мин</translation>
     </message>
     <message>
         <source>2 min</source>
-        <translation>2 мин</translation>
+        <translation type="obsolete">2 мин</translation>
     </message>
     <message>
         <source>5 min</source>
-        <translation>5 мин</translation>
+        <translation type="obsolete">5 мин</translation>
     </message>
     <message>
         <source>15 min</source>
-        <translation>15 мин</translation>
+        <translation type="obsolete">15 мин</translation>
     </message>
     <message>
         <source>30 min</source>
-        <translation>30 мин</translation>
+        <translation type="obsolete">30 мин</translation>
     </message>
     <message>
         <source>System</source>
@@ -119,6 +119,34 @@
     <message>
         <source>Russian</source>
         <translation>Русский</translation>
+    </message>
+    <message>
+        <source>1 minute</source>
+        <translation>1 минута</translation>
+    </message>
+    <message>
+        <source>2 minutes</source>
+        <translation>2 минуты</translation>
+    </message>
+    <message>
+        <source>5 minutes</source>
+        <translation>5 минут</translation>
+    </message>
+    <message>
+        <source>15 minutes</source>
+        <translation>15 минут</translation>
+    </message>
+    <message>
+        <source>30 minutes</source>
+        <translation>30 минут</translation>
+    </message>
+    <message>
+        <source>1 hour</source>
+        <translation>1 час</translation>
+    </message>
+    <message>
+        <source>2 hours</source>
+        <translation>2 часа</translation>
     </message>
 </context>
 <context>

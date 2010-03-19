@@ -109,11 +109,13 @@ QStringList Settings::updateIntervals () const
     QStringList res;
 
     res.append (tr ("Never"));
-    res.append (tr ("1 min"));
-    res.append (tr ("2 min"));
-    res.append (tr ("5 min"));
-    res.append (tr ("15 min"));
-    res.append (tr ("30 min"));
+    res.append (tr ("1 minute"));
+    res.append (tr ("2 minutes"));
+    res.append (tr ("5 minutes"));
+    res.append (tr ("15 minutes"));
+    res.append (tr ("30 minutes"));
+    res.append (tr ("1 hour"));
+    res.append (tr ("2 hours"));
 
     return res;
 }
@@ -121,7 +123,7 @@ QStringList Settings::updateIntervals () const
 
 int Settings::intervalIndex2Minutes (int index) const
 {
-    int int2min[] = { -1, 1, 2, 5, 15, 30 };
+    int int2min[] = { -1, 1, 2, 5, 15, 30, 60, 120 };
 
     if (index < 0 || sizeof (int2min) / sizeof (int2min[0]) <= (unsigned int)index)
         return -1;
@@ -145,6 +147,10 @@ int Settings::minutes2IntervalIndex (int minutes) const
             return 4;
         case 30:
             return 5;
+        case 60:
+            return 6;
+        case 120:
+            return 7;
         default:
             return 0;
     }
