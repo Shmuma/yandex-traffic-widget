@@ -17,7 +17,7 @@ void HttpFetcher::fetch (const QString& url)
 {
     QUrl u (url);
 
-    if (_http.currentId () != )
+    if (_http.currentId () != 0)
         _http.abort ();
 
     if (u.isValid ()) {
