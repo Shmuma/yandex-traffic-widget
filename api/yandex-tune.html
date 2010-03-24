@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0
+                       Strict//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible"content="IE=EmulateIE7"/>
+    <meta http-equiv="Content-Type"content="text/html; charset=utf-8"/>
+    <meta name="title"content="Пробки на маршруте"/>
+    <style type="text/css">body{padding:0;margin:0;font:normal 80%
+      Arial}form{margin:0;padding:0}input{font:normal 1em
+      Arial,sans-serif}.g-hidden{display:none!important}.l-addr{width:98%;border-collapse:collapse}.l-addr
+      td{padding:0;vertical-align:top}.l-addr .l-addr-cell{width:50%}.l-addr
+      .l-addr-g i{display:block;width:10px}.l-addr
+      td.l-addr-b{font-weight:bold;width:50%;text-align:left;vertical-align:bottom}.l-addr
+      td.l-addr-b_top{vertical-align:top}.b-jam-title{font:bold 1.2em
+      Arial,sans-serif;margin-bottom:2px}.b-addr{width:100%;padding-left:18px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box}.b-refresh{margin:0
+      0 0 5px;padding:0
+      .2em}.b-info{display:block;width:auto;height:1.5em;color:#555;padding:.2em 0
+      .3em 0;font-size:.85em}.b-info
+      .b-msg{width:auto;color:#fff;background-color:#2ABC2A;font:bold 120%
+      Arial,sans-serif;padding:0 1em 0 .3em}.b-info
+      .b-msg_error{background-color:#e00}.b-info
+      .b-msg_warn{background-color:#FA7D01}.b-ctrls{font:normal 1em
+      Arial,sans-serif;position:relative;margin:5px 0}.b-ctrls
+      .help{position:relative;margin:5px 0;padding:0 160px 0 0;font:bold 1em
+      Arial,sans-serif;text-align:right;color:#606060}.b-via-button{position:absolute;width:152px;height:22px;top:-2px;right:3px;background:#fff
+      url(//img.yandex.net/i/dform/jam/add-via-point.png) 0 0
+      no-repeat;cursor:pointer}.b-via-button_clicked{background-position:0
+      -22px}.b-button{width:7em;margin-right:1em;white-space:nowrap}.b-button_default{font-weight:bold}.b-balloon{font:normal
+      12px
+      Arial,sans-serif;text-align:center;min-width:4em;padding-bottom:2px}.b-balloon
+      b{font-weight:normal}.b-balloon .del{margin-left:8px;font:normal 11px
+      Arial,sans-serif;color:#d00;border-bottom:dotted 1px
+      #d00;cursor:pointer}.b-balloon
+      .del:hover{border-bottom-style:solid}.b-userbutton-caption{padding:0 5px 0
+      0;font:bold 15px Arial,sans-serif;line-height:27px}.b-gr{color:#888;padding:0
+      3px 0
+      3px}.b-user-label{position:relative;width:95%;height:1.5em;padding-bottom:2px}.b-user-label
+      .b-user-label__static{white-space:nowrap;border-bottom:dotted 1px
+      #000;cursor:pointer}.b-user-label .b-user-label__edit{font:normal 1em
+      Arial,sans-serif;position:absolute;top:0;left:0;width:15em;display:none;border:solid
+      1px
+      #888;background:#fff;z-index:100}#YMapsID{width:100%;height:300px}#resetall{font:normal
+      1em
+      Arial,sans-serif;position:absolute;right:1px;bottom:.4em;cursor:pointer;color:#888;border-bottom:dotted
+      1px
+      #888}#resetall:hover{color:#e00;border-bottom-color:#e00}.b-smart-label{position:relative;height:1.85em;overflow:hidden}.b-smart-label
+      i{position:absolute;display:block;width:14px;height:100%;top:0;left:4px;z-index:10}.b-smart-label
+      .b-smart-label__home{background:url(http://img.yandex.net/i/dform/jam/route-point-green.png)
+      0 center no-repeat}.b-smart-label
+      .b-smart-label__work{background:url(http://img.yandex.net/i/dform/jam/route-point-blocks.png)
+      0 center no-repeat}.b-smart-label
+      label{position:absolute;top:3px;left:21px;z-index:10;padding:0;margin:0;font-size:1em;color:#a0a0a0;cursor:text;white-space:nowrap}.b-smart-label
+      .off{left:-3000px}</style>
+    <!--[if IE]>
+    <style type="text/css">* html
+      .b-ctrls{zoom:1}.l-addr{width:100%}.b-addr{width:90%}* html .b-smart-label
+      i{top:5px;height:14px}* html .b-smart-label
+      .b-smart-label__home{-background:none;-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=http://img.yandex.net/i/dform/jam/route-point-green.png)}*
+      html .b-smart-label
+      .b-smart-label__work{-background:none;-filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=http://img.yandex.net/i/dform/jam/route-point-blocks.png)}</style>
+    <![endif]-->
+    <script type="text/javascript"src="http://img.yandex.net/webwidgets/1/WidgetApi.js">
+    </script>
+    <script src="http://api-maps.yandex.ru/1.1/?key=AE_AjkgBAAAAVhRKNwIAC8tjU2RrhP-ZqBu8wUeLshaL0DUAAAAAAAAAAABvwCsB0jR6VKSmbT2ZrfeIDgc8bg==~AIjAjkgBAAAAbw43bgIAgoFaZzyAbV54HVt9PueO4c4w-5gAAAAAAAAAAAA64IjoDNvFTVN2SEqaZO38eh_fMw==~AO0V1EoBAAAAXeYMcQIA4dz0va7f19syy0BH94hwX7A9UG0AAAAAAAAAAAD3lBnSWu6wycdxwJyqkjrsJq3h3A=="type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      widget.onload=function()
+      {
+      var o,E,F,a,s,f=10,K={gohome:[],gowork:[]},n={home:"",work:""},g="gohome",v={gohome:true,gowork:true},w={gohome:{icon:"http://img.yandex.net/i/dform/jam/gohome.gif",caption:'<strong class="b-userbutton-caption">домой</strong>',hint:"Построить маршрут"},gowork:{icon:"http://img.yandex.net/i/dform/jam/gowork.gif",caption:'<strong class="b-userbutton-caption">на работу</strong>',hint:"Построить маршрут"}},b="",G=/^Россия\,\s+(?:Москва\,\s+)?/i,x=new YMaps.GeoBounds(new YMaps.GeoPoint(34.781753,54.00168),new YMaps.GeoPoint(40.781834,57.268665)),J,H,l,D,k,y,c,h={home:"",work:""},r,d=$(".b-info"),z=$("input[name=work_addr]"),m=$("input[name=home_addr]"),j;function A(i){return i.replace(/\&/g,"&amp;").replace(/\</g,"&lt;").replace(/\>/g,"&gt;")}function I(i){var L=widget.getValue(i);if(L===j){return""}else{return L}}function u(){var L=$(".b-user-label_home .b-user-label__edit").val(),i=$(".b-user-label_work .b-user-label__edit").val();if(L.toLowerCase()==="дом"){L=""}if(i.toLowerCase()==="работа"){i=""}widget.savePreferences({homeAddr:m.val(),workAddr:z.val(),homeGeo:n.home,workGeo:n.work,homeTransit:K.gohome.join("|"),workTransit:K.gowork.join("|"),homeLabel:L,workLabel:i});widget.hidePreferences()}function p(){m.val("");z.val("");n.home="";n.work="";K.gohome=[];K.gowork=[];$(".b-user-label_home").find(".b-user-label__static").text("Дом:").end().find(".b-user-label__edit").val("Дом");$(".b-user-label_work").find(".b-user-label__static").text("Работа:").end().find(".b-user-label__edit").val("Работа")}function C(i,M){var L={caption:'<strong class="b-userbutton-caption">'+(C.dict[M.toLowerCase()]||A(M))+"</strong>"};if(i=="gohome"){k.setContent($.extend(false,{},w.gohome,L))}else{y.setContent($.extend(false,{},w.gowork,L))}}C.dict={"дом":"домой","работа":"на работу","дача":"на дачу","институт":"в институт","университет":"в университет","универ":"в универ","юнивер":"в юнивер","яндекс":"в Яндекс!","учёба":"на учёбу","учеба":"на учебу","школа":"в школу","ясли":"в ясли","няня":"к няне","детсад":"в детсад","детский сад":"в детсад","больница":"в больницу","офис":"в офис","клуб":"в клуб","кино":"в кино","ресторан":"в ресторан","кафе":"в кафе","театр":"в театр","фитнес":"на фитнес","магазин":"в магазин","мама":"к маме","папа":"к папе","бабушка":"к бабушке","дедушка":"к дедушке","сестра":"к сестре","брат":"к брату","родители":"к родителям"};function B(i){var M=new YMaps.Placemark(i,{draggable:true,style:"default#greenSmallPoint",hasBalloon:true});var N=parseInt($.inArray(i.toString(),K[g])+1,10);M.metaDataProperty.prevPoint=i.toString();M.metaDataProperty.pointIndex=N;var L=$('<div class="b-balloon">
+  <b>
+    <span class="b-gr">['+N+']</span>Уточняющая точка</b>
+  <br />
+  <span class="del">удалить точку</span>
+</div>').get(0);M.setBalloonContent(L);var O=M.getBalloonContent();$(".del",O).eq(0).data("placemark",M);$(".del",O).eq(0).click(function(P){P.stopPropagation();var R=$(this).data("placemark");var Q=$.inArray(R.getGeoPoint().toString(),K[g]);if(Q>-1){K[g].splice(Q,1);$(this).removeData("placemark");R=null;e({restoreRoute:true})}});a.add(M);YMaps.Events.observe(M,M.Events.DragEnd,function(){var P=this.getGeoPoint().toString();var Q=$.inArray(this.metaDataProperty.prevPoint,K[g]);if(Q>-1){K[g][Q]=P}this.metaDataProperty.prevPoint=P;b=P;e()})}function t(i){r=window.setTimeout(function(){e(i)},1700)}function q(N){var L=N.getGeoPoint(),P=-1,M=0,O=0,i=false,R=m,Q=N.metaDataProperty.locationType||"home";if(Q=="home"){R=m}else{R=z}R.val(L.toString()).trigger("jsupdate");if(n[Q]!=""){M=n[Q].split(",")[0];O=n[Q].split(",")[1];P=L.distance(new YMaps.GeoPoint(M,O))}n[Q]=L.toString();if(P>0&&P<2000){i=true}e({preserveViaPoints:i,noAutoApply:true,applyReverseGeoTo:Q})}function e(N){if(!N){var N={}}window.clearTimeout(r);var P=m.val(),i=z.val(),M=[],L=[],O=null;$(".b-ctrls .help").hide();if(P===""){d.html('<span class="b-msg b-msg_warn">Укажите адрес</span>');m.one("blur",function(){d.html("")});m.focus();K.gohome=[];K.gowork=[];return true}if(i===""){d.html('<span class="b-msg b-msg_warn">Укажите адрес</span>');z.one("blur",function(){d.html("")});z.focus();K.gohome=[];K.gowork=[];return true}if(h.home!==P||h.work!==i){if(h.home!==P){n.home=""}if(h.work!==i){n.work=""}h.home=P;h.work=i;if(!N.preserveViaPoints){K.gohome=[];K.gowork=[]}v.gohome=true;v.gowork=true}if(n.home!==""){P=n.home}if(n.work!==""){i=n.work}if(g=="gohome"){k.select()}else{y.select()}if(N.restoreRoute){d.html('<span class="b-msg">Восстанавливаем прежний маршрут...</span>')}else{d.html('<span class="b-msg">Строим маршрут...</span>')}if(a){o.removeOverlay(a)}$.merge(M,[g=="gohome"?i:P]);$.merge(M,K[g]);$.merge(M,[g=="gohome"?P:i]);$.each(K[g],function(Q){L.push(Q+1)});a=new YMaps.OverlayGroup();o.addOverlay(a);E=new YMaps.Router(M,L,{viewAutoApply:(N.noAutoApply?false:v[g]),boundedBy:x,strictBounds:true});v[g]=false;O=new YMaps.Style("router#route");O.lineStyle=new YMaps.LineStyle();O.lineStyle.strokeWidth=3;O.lineStyle.strokeColor=(g=="gohome")?"C900ECff":"0078ffff";E.setStyle(O);YMaps.Events.observe(E,E.Events.Success,function(){if(g=="gowork"){n.home=E.getWayPoint(0).getGeoPoint().toString();n.work=E.getWayPoint(1).getGeoPoint().toString()}else{if(g=="gohome"){n.home=E.getWayPoint(1).getGeoPoint().toString();n.work=E.getWayPoint(0).getGeoPoint().toString()}}if(K[g].length<f){$(".b-ctrls .help").show();c.trigger("btnenable")}else{c.trigger("btndisable")}var ap=new YMaps.Polyline(E.getRoute(0).getPoints(),{hasBalloon:false,hasHint:false,interactive:false});var an=new YMaps.Style();an.lineStyle=new YMaps.LineStyle();an.lineStyle.strokeWidth=6;an.lineStyle.strokeColor="ffffff";ap.setStyle(an);a.add(ap);var V=this.getWayPoint(0);V.metaDataProperty.locationType=(g=="gohome")?"work":"home";V.setStyle("jam#"+V.metaDataProperty.locationType);V.setOptions({draggable:true,hasBalloon:false});var R=this.getWayPoint(1);R.metaDataProperty.locationType=(g=="gohome")?"home":"work";R.setStyle("jam#"+R.metaDataProperty.locationType);R.setOptions({draggable:true,hasBalloon:false});YMaps.Events.observe(V,V.Events.DragEnd,q);YMaps.Events.observe(R,R.Events.DragEnd,q);a.add(this);F=E.getRoute(0);var ag=F.getPoints();var S=F.getNumRouteSegments(),av=[];for(var al=0;al<S-1;al++){av.push({distance:F.getRouteSegment(al).getDistance(),segmentIndex:al,polyIndex:F.getRouteSegment(al).getPolylineIndex()})}av.sort(function(Y,X){if(Y.distance<X.distance){return 1}else{if(Y.distance>X.distance){return -1}else{return 0}}});for(var al=0;av.length>0&&al<4;al++){var am=av.shift(),aj=am.polyIndex,ai=F.getRouteSegment(am.segmentIndex+1).getPolylineIndex(),ah=Math.round((parseInt(aj,10)+parseInt(ai,10))/2),ab=o.converter.coordinatesToLocalPixels(F.getPoint(aj)),aa=o.converter.coordinatesToLocalPixels(F.getPoint(ai)),Z=aa.x-ab.x,W=aa.y-ab.y,ac=(Math.round((180*Math.atan2(Z,W)/Math.PI)/15)*15+270)%360,ao=new YMaps.Placemark(F.getPoint(ah),{hasBalloon:false,draggable:false,interactive:false}),Q=new YMaps.Style();Q.iconStyle=new YMaps.IconStyle();Q.iconStyle.offset=new YMaps.Point(-9,-9);Q.iconStyle.href="http://img.yandex.net/i/dform/jam/"+ac+"_"+g+".png";Q.iconStyle.size=new YMaps.Point(18,18);ao.setStyle(Q);a.add(ao)}$.each(K[g],function(){B(new YMaps.GeoPoint(this.split(",")[0],this.split(",")[1]))});var ae=[];for(var al=0,ak=F.getNumRouteSegments();al<ak;al++){var U=F.getRouteSegment(al);ae.push({street:U.getStreet(),point:ag[U.getPolylineIndex()]})}ae.push({street:"",point:ag[ag.length-1]});var af=[];a.forEach(function(X){if(X.metaDataProperty&&X.metaDataProperty.prevPoint){af.push(X)}});var at=true;for(var al=0,ak=ae.length-1;al<ak;al++){try{var au=ae[al].point.distance(ae[al+1].point)}catch(ar){at=false;break}$.each(af,function(){if(this.metaDataProperty.maxAngle===j){this.metaDataProperty.maxAngle=0}var aw=ae[al].point.distance(this.getGeoPoint()),Y=ae[al+1].point.distance(this.getGeoPoint());if(aw==0){aw=0.1}if(Y==0){Y=0.1}var X=Math.acos((Math.pow(aw,2)+Math.pow(Y,2)-Math.pow(au,2))/(2*aw*Y));if(X>this.metaDataProperty.maxAngle){this.metaDataProperty.maxAngle=X;this.metaDataProperty.segmentIndex=al}})}$.each(af,function(){if(at){$(this.getBalloonContent()).find("b").html('<span class="b-gr">['+this.metaDataProperty.pointIndex+"]</span> "+ae[this.metaDataProperty.segmentIndex].street);this.update()}delete this.metaDataProperty.segmentIndex;delete this.metaDataProperty.maxAngle});ae=null;var aq="&#8776;<strong>"+Math.round(E.getDistance()/1000)+" км.</strong>   &#8776;<strong>";if(Math.floor(E.getDuration()/3600)>0){aq+=Math.floor(E.getDuration()/3600)+" ч. "}aq+=Math.round((E.getDuration()%3600)/60)+" мин.</strong>";d.html(aq);$(".b-ctrls .b-button_default").show();if(s===j){s=YMaps.Events.observe(o,o.Events.Click,function(Y,ay){if(K[g].length>=f){d.html('<span class="b-msg b-msg_warn">Нельзя добавить более '+f+" промежуточных точек</span>");return true}if(!E||!E.getMap()||!F){return true}var X=0,aJ=0,aw=[],aI=ay.getGeoPoint();$.merge(aw,K[g]);aw.unshift(E.getWayPoint(0).getGeoPoint().toString());aw.push(E.getWayPoint(1).getGeoPoint().toString());for(var aA=0,az=aw.length-1;aA<az;aA++){var aG=aw[aA].split(","),aE=aw[aA+1].split(","),aC,aB,aH,aF,aD,ax;aC=new YMaps.GeoPoint(aG[0],aG[1]);aB=new YMaps.GeoPoint(aE[0],aE[1]);aH=aI.distance(aB);aF=aI.distance(aC);aD=aC.distance(aB);if(aH==0){aH=0.1}if(aF==0){aF=0.1}ax=Math.acos((Math.pow(aH,2)+Math.pow(aF,2)-Math.pow(aD,2))/(2*aH*aF));if(ax>X){X=ax;aJ=aA}}K[g].splice(aJ,0,aI.toString());b=aI.toString();e()});s.disable()}if(N.saveNow){u()}if(N.applyReverseGeoTo){var ad=new YMaps.Geocoder(n[N.applyReverseGeoTo]),T=new Date().getTime();YMaps.Events.observe(ad,ad.Events.Load,function(){if(this.length()&&(new Date().getTime())-T<2000){var X=this.get(0),aw="",Y=N.applyReverseGeoTo=="home"?m:z;if(X.kind=="house"||X.kind=="street"||X.kind=="metro"||X.kind=="district"||X.kind=="railway"||X.kind=="vegetation"||X.kind=="cemetery"||X.kind=="bridge"||X.kind=="km"){aw=X.text.replace(G,"");Y.val(aw).trigger("jsupdate");h[N.applyReverseGeoTo]=aw}}})}});YMaps.Events.observe(E,E.Events.Fault,function(){d.html('<span class="b-msg b-msg_error">Не удалось построить маршрут, попробуйте ещё раз.</span>');K[g]=[];o.removeOverlay(a);$(".b-ctrls .b-button_default").hide()});YMaps.Events.observe(E,E.Events.GeocodeError,function(Q,R){if((R==0&&g=="gohome")||(R==1&&g=="gowork")){d.html('<span class="b-msg b-msg_error">Не удалось найти адрес. Пожалуйста, уточните его.</span>');z.focus()}else{if((R==0&&g=="gowork")||(R==1&&g=="gohome")){d.html('<span class="b-msg b-msg_error">Не удалось найти адрес. Пожалуйста, уточните его.</span>');m.focus()}}o.removeOverlay(a);$(".b-ctrls .b-button_default").hide()});YMaps.Events.observe(E,E.Events.RouteError,function(R,S){var T=K[g].length;$(".b-ctrls .b-button_default").hide();if(T==0){d.html('<span class="b-msg b-msg_error">Не удалось проложить маршрут. Попробуйте уточнить адреса.</span>');o.removeOverlay(a)}else{if(b!==""){var Q=$.inArray(b,K[g]);if(Q!=-1){K[g].splice(Q,1)}else{K[g].splice(S-1,1)}d.html('<span class="b-msg b-msg_error">Не удалось проложить маршрут через эту точку</span>');o.removeOverlay(a);v[g]=true;t({restoreRoute:true})}else{K[g]=[];o.removeOverlay(a);d.html('<span class="b-msg b-msg_error">Не получается проложить маршрут</span>')}}})}$(".b-refresh").click(function(){e()});$(document.forms.addr).submit(function(i){i.preventDefault()});$(document.forms.addr).keypress(function(i){if(i.keyCode==13&&i.target.nodeName.toLowerCase()=="input"&&!i.shiftKey&&!i.ctrlKey&&!i.altKey){e()}});$("#saveall").click(function(){if(m.val()===""&&z.val()===""&&(h.home!==""||h.work!=="")){p();u()}else{if(m.val()===""||z.val()===""||h.home!==m.val()||h.work!==z.val()||(!E||!E.getMap()||!F)){e({saveNow:true})}else{u()}}});$("#cancelall").click(function(){widget.hidePreferences()});$("#resetall").click(function(){p();u()});if(screen.height<=650){document.getElementById("YMapsID").style.height="260px"}o=new YMaps.Map(document.getElementById("YMapsID"));o.setMinZoom(7);o.setCenter(new YMaps.GeoPoint(37.64,55.76),10);o.addControl(new YMaps.Zoom({noTips:true}));o.enableScrollZoom();l=new YMaps.ToolBar([]);k=new YMaps.ToolBarButton(w.gohome);y=new YMaps.ToolBarButton(w.gowork);YMaps.Events.observe(k,k.Events.Click,function(i){if(!i.isSelected()){g="gohome";i.select();y.deselect();e()}});YMaps.Events.observe(y,y.Events.Click,function(i){if(!i.isSelected()){g="gowork";i.select();k.deselect();e()}});l.add(k);l.add(y);o.addControl(l);$.each(["home","work"],function(M,L){var i=I(L+"Label");if(i!==""){$(".b-user-label_"+L).find(".b-user-label__static").text(i).end().find(".b-user-label__edit").val(i).end();C("go"+L,i)}});$(".b-user-label__static").click(function(){$(this).hide().closest(".b-user-label").find(".b-user-label__edit").show().focus().select().trigger("keypress")});$(".b-user-label__edit").bind("blur keypress",function(M){M.stopPropagation();var L=$(this),i;if(M.keyCode==13||M.type=="blur"){i=L.closest(".b-user-label");L.hide();if(/^\s*$/.test(this.value)){if(i.hasClass("b-user-label_home")){this.value="Дом"}else{this.value="Работа"}}this.value=this.value.replace(/^\s*/,"").replace(/\s*$/,"");i.find(".b-user-label__static").text(this.value).show();if(i.hasClass("b-user-label_home")){C("gohome",this.value)}else{C("gowork",this.value)}}});c=$(".b-via-button").eq(0);c.bind("btnselect",function(){$(this).addClass("b-via-button_clicked").data("selected",true);o.addCursor(YMaps.Cursor.CROSSHAIR);if(s!==j){s.enable()}}).bind("btndeselect",function(){$(this).removeClass("b-via-button_clicked").data("selected",false);o.addCursor(YMaps.Cursor.INHERIT);if(s!==j){s.disable()}}).bind("btnenable",function(){$(this).css({opacity:1,cursor:"pointer"}).removeData("disabled")}).bind("btndisable",function(){$(this).css({opacity:0.5,cursor:"default"}).data("disabled",true)}).click(function(){if($(this).data("disabled")){return true}if($(this).data("selected")){$(this).trigger("btndeselect")}else{$(this).trigger("btnselect")}});J=new YMaps.Style();J.iconStyle=new YMaps.IconStyle();J.iconStyle.offset=new YMaps.Point(0,-22);J.iconStyle.href="http://img.yandex.net/i/dform/jam/route-flag-green.png";J.iconStyle.size=new YMaps.Point(21,22);J.iconStyle.shadow=new YMaps.IconShadowStyle();J.iconStyle.shadow.offset=new YMaps.Point(1,-15);J.iconStyle.shadow.href="http://img.yandex.net/i/dform/jam/route-flag-green-shadow.png";J.iconStyle.shadow.size=new YMaps.Point(23,15);YMaps.Styles.add("jam#home",J);H=new YMaps.Style();H.iconStyle=new YMaps.IconStyle();H.iconStyle.offset=new YMaps.Point(0,-22);H.iconStyle.href="http://img.yandex.net/i/dform/jam/route-flag-blocks.png";H.iconStyle.size=new YMaps.Point(21,22);H.iconStyle.shadow=new YMaps.IconShadowStyle();H.iconStyle.shadow.offset=new YMaps.Point(1,-15);H.iconStyle.shadow.href="http://img.yandex.net/i/dform/jam/route-flag-blocks-shadow.png";H.iconStyle.shadow.size=new YMaps.Point(23,15);YMaps.Styles.add("jam#work",H);$(".b-smart-label label").bind("click",function(){$(this).addClass("off");$(this).closest(".b-smart-label").find("input,textarea").focus()});$(".b-smart-label").each(function(){var L=$(this),i=L.find("input").eq(0);L.find("i").click(function(){i.focus()});if(i.val()!==""){L.find("label").eq(0).addClass("off")}i.bind("focus",function(){$(this).closest(".b-smart-label").find("label").addClass("off")}).bind("blur",function(){if(this.value===""){$(this).closest(".b-smart-label").find("label").removeClass("off")}}).bind("jsupdate",function(){if(this.value===""){$(this).closest(".b-smart-label").find("label").removeClass("off")}else{$(this).closest(".b-smart-label").find("label").addClass("off")}})});m.val(I("homeAddr")).trigger("jsupdate");h.home=I("homeAddr");z.val(I("workAddr")).trigger("jsupdate");h.work=I("workAddr");K.gowork=I("workTransit")===""?[]:I("workTransit").split("|");K.gohome=I("homeTransit")===""?[]:I("homeTransit").split("|");n.home=I("homeGeo");n.work=I("workGeo");o.addCursor(YMaps.Cursor.INHERIT);$(".b-ctrls .help").hide();$(".b-ctrls .b-button_default").hide();if(m.val()!==""&&z.val()!==""){e()}};</script>
+ </head>
+<body>
+  <div class="b-jam-title">Загруженность дорог на вашем маршруте</div>
+  <img style="position: absolute; top: 0; left: 0"src="http://clck.yandex.ru/click/dtype=stred/pid=132/cid=2919/path=probki.setup/*http://www.yandex.ru"width="1"height="1"alt=""border="0"/>
+  <form name="addr"method="get"action="#">
+    <table class="l-addr">
+      <tr>
+        <td class="l-addr-b">
+          <div class="b-user-label b-user-label_home">
+            <b class="b-user-label__static">Дом</b>:<input class="b-user-label__edit"type="text"value="Дом"maxlength="15"/>
+          </div>
+        </td>
+        <td class="l-addr-g">
+          <i>
+          </i>
+        </td>
+        <td class="l-addr-b">
+          <div class="b-user-label b-user-label_work">
+            <b class="b-user-label__static">Работа</b>:<input class="b-user-label__edit"type="text"value="Работа"maxlength="15"/>
+          </div>
+        </td>
+        <td>
+          <br />
+        </td>
+      </tr>
+      <tr>
+        <td class="l-addr-cell">
+          <div class="b-smart-label">
+            <label for="router-home-addr">укажите адрес</label>
+            <i class="b-smart-label__home">
+            </i>
+            <input id="router-home-addr"class="b-addr"type="text"name="home_addr"value=""/>
+          </div>
+        </td>
+        <td class="l-addr-g">
+          <i>
+          </i>
+        </td>
+        <td class="l-addr-cell">
+          <div class="b-smart-label">
+            <label for="router-work-addr">укажите адрес</label>
+            <i class="b-smart-label__work">
+            </i>
+            <input id="router-work-addr"class="b-addr"type="text"name="work_addr"value=""/>
+          </div>
+        </td>
+        <td class="l-addr-b l-addr-b_top">
+          <input class="b-refresh"type="button"value="Проложить"/>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <div class="b-info">
+  </div>
+  <div id="YMapsID">
+  </div>
+  <div class="b-ctrls">
+    <div class="help"style="position: relative; padding-right: 160px">Уточните маршрут — расставьте промежуточные точки:<div class="b-via-button">
+      </div>
+    </div>
+    <button id="saveall"class="b-button b-button_default">Сохранить</button>
+    <button id="cancelall"class="b-button">Отмена</button>
+    <span id="resetall">Сбросить настройки</span>
+  </div>
+</body>
+</html>

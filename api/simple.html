@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>Router API test</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    <script type="text/javascript"
+    src="http://api-maps.yandex.ru/1.1.7/index.xml?key=AJ91o0sBAAAA0iWdNwIAtx4A1D3HX07OqyA3kR0wpFl9NNsAAAAAAAAAAAADvPbr8aYdcSB0gmSH0Qr-tjU_RQ=="></script>
+    
+    <script type="text/javascript">
+      var map;
+
+      YMaps.jQuery (function () {
+      map = new YMaps.Map (YMaps.jQuery ("#YMapsID")[0]);
+
+      map.setCenter (new YMaps.GeoPoint (37.64, 55.76), 10);
+
+      var router1 = new YMaps.Router(['Зеленый проспект 65', 'Саянская 13Б', 'Авиамоторная 53'],
+      [1], { viewAutoApply: true, avoidTrafficJams: false });
+
+      var router2 = new YMaps.Router(['Зеленый проспект 65', 'Саянская 13Б', 'Авиамоторная 53'],
+      [1], { viewAutoApply: true, avoidTrafficJams: true });
+
+
+      YMaps.Events.observe (router1, router1.Events.Success, function (number) {
+      document.getElementById ("time_without_jams").innerHTML = router1.getDuration ();
+      document.getElementById ("len_without_jams").innerHTML = router1.getDistance ();
+      map.addOverlay(router1);
+      });
+
+      YMaps.Events.observe (router2, router2.Events.Success, function (number) {
+      document.getElementById ("time_with_jams").innerHTML = router2.getDuration ();
+      document.getElementById ("len_with_jams").innerHTML = router2.getDistance ();
+      map.addOverlay(router2);
+      });
+      });
+    </script>
+  </head>
+
+  <body>
+    <h1>API simple test</h1>
+    <div id="YMapsID" style="width:600px;height:400px"></div> 
+
+    <h2>Маршрут без пробок</h2>
+    Время в пути: <a id="time_without_jams">???</a> секунд<br/>
+    Длина маршрута: <a id="len_without_jams">???</a> метров<br/>
+
+    <h2>Маршрут c учетом пробок</h2>
+    Время в пути: <a id="time_with_jams">???</a> секунд<br/>
+    Длина маршрута: <a id="len_with_jams">???</a> метров<br/>
+  </body>
+</html>
