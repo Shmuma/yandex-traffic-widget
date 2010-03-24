@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:yroute="http://maps.yandex.ru/router/1.x" xmlns:ymaps="http://maps.yandex.ru/ymaps/1.x" xmlns:gml="http://www.opengis.net/gml" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://maps.yandex.ru/router/1.x" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://www.opengis.net/gml" schemaLocation="../../ymaps/1.x/gml.xsd"/>
+	<xs:import namespace="http://maps.yandex.ru/ymaps/1.x" schemaLocation="../../ymaps/1.x/ymaps.xsd"/>
+	<xs:simpleType name="actionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="slight right"/>
+			<xs:enumeration value="right"/>
+			<xs:enumeration value="hard right"/>
+			<xs:enumeration value="slight left"/>
+			<xs:enumeration value="left"/>
+			<xs:enumeration value="hard left"/>
+			<xs:enumeration value="back"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="streetType">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="towards" type="xs:boolean"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="RouterRouteMetaData" type="yroute:RouterRouteMetaDataType" substitutionGroup="gml:_MetaData"/>
+	<xs:complexType name="RouterRouteMetaDataType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>
+               route metadata
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="true">
+			<xs:extension base="gml:AbstractMetaDataType">
+				<xs:sequence>
+					<xs:element name="length" type="xs:double"/>
+					<xs:element name="time" type="xs:double"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="RouterSegmentMetaData" type="yroute:RouterSegmentMetaDataType" substitutionGroup="gml:_MetaData"/>
+	<xs:complexType name="RouterSegmentMetaDataType" mixed="true">
+		<xs:annotation>
+			<xs:documentation>
+               metadata of route's segment
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent mixed="true">
+			<xs:extension base="gml:AbstractMetaDataType">
+				<xs:sequence>
+					<xs:element name="street" type="yroute:streetType"/>
+					<xs:element name="action" type="yroute:actionType"/>
+					<xs:element name="angle" type="xs:double"/>
+					<xs:element name="length" type="xs:double"/>
+					<xs:element name="time" type="xs:double"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>
