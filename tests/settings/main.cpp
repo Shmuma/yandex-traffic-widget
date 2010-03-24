@@ -6,8 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app (argc, argv);
-    Settings settings;
-    SettingsDialog dlg (&settings);
+    SettingsDialog dlg (Settings::instance ());
 
     dlg.show ();
 
