@@ -12,19 +12,9 @@
 class TrafficInfo
 {
 private:
-    float _len1, _len2, _len;
-    QDateTime _ts;
-    QString _isotime;
-    QString _localtime;
-
     bool _valid;
 
 protected:
-    float getFloatNode (const QDomElement& elem, const char* node, float def);
-    int getIntNode (const QDomElement& elem, const char* node, int def);
-    QString getStringNode (const QDomElement& elem, const char* node) throw (const QString&);
-    QDateTime getTSNode (const QDomElement& elem, const char* node) throw (const QString&);
-
     void setValid (bool new_val)
     { _valid = new_val; };
 
@@ -33,22 +23,12 @@ public:
         : _valid (false)
     {};
 
-    TrafficInfo (const QDomElement& elem) throw (const QString&);
-
     bool valid () const
     { return _valid; };
-
-    QString localtime () const
-    { return _localtime; };
-
-    QDateTime ts () const
-    { return _ts; };
-
-    virtual void dump ();
 };
 
 
-class ExtendedTrafficInfo : public TrafficInfo
+class CityTrafficInfo : public TrafficInfo
 {
 public:
     enum light_color {
@@ -59,18 +39,25 @@ public:
     };
 
 private:
-    float _level_raw;
-    int _level;
+    QDateTime _ts;
+    int _level, _tend;
     light_color _color;
-    int _tend;
     QString _hint;
 
+    float getFloatNode (const QDomElement& elem, const char* node, float def);
+    int getIntNode (const QDomElement& elem, const char* node, int def);
+    QString getStringNode (const QDomElement& elem, const char* node) throw (const QString&);
+    QDateTime getTSNode (const QDomElement& elem, const char* node) throw (const QString&);
+
 public:
-    ExtendedTrafficInfo ()
+    CityTrafficInfo ()
         : TrafficInfo ()
     {};
 
-    ExtendedTrafficInfo (const QDomElement& elem) throw (const QString&);
+    CityTrafficInfo (const QDomElement& elem) throw (const QString&);
+
+    QDateTime ts () const
+    { return _ts; };
 
     int level () const
     { return _level; };
@@ -81,7 +68,7 @@ public:
     QString hint () const
     { return _hint; };
 
-    ExtendedTrafficInfo::light_color color () const
+    CityTrafficInfo::light_color color () const
     { return _color; };
 
     virtual void dump ();
@@ -95,8 +82,7 @@ class Traffic : public QObject
 private:
     QDateTime _ts;
 
-    QMap<QString, TrafficInfo> _info;
-    QMap<QString, ExtendedTrafficInfo> _ext_info;
+    QMap<QString, CityTrafficInfo> _ext_info;
 
     HttpFetcher _fetcher;
 
@@ -116,8 +102,7 @@ public:
     QDateTime ts () const
     { return _ts; };
 
-    TrafficInfo lookup (const QString &id) const;
-    ExtendedTrafficInfo lookup_ext (const QString &id) const;
+    CityTrafficInfo lookup_ext (const QString &id) const;
 };
 
 

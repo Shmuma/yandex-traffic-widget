@@ -10,7 +10,7 @@ class TrafficLight : public QWidget
     Q_OBJECT
 
 private:
-    ExtendedTrafficInfo::light_color _color;
+    CityTrafficInfo::light_color _color;
 
 protected:
     void paintEvent (QPaintEvent *event);
@@ -18,10 +18,10 @@ protected:
 public:
     TrafficLight (QWidget *parent);
 
-    ExtendedTrafficInfo::light_color color () const
+    CityTrafficInfo::light_color color () const
     { return _color; };
 
-    void setColor (ExtendedTrafficInfo::light_color color)
+    void setColor (CityTrafficInfo::light_color color)
     { 
         _color = color;
         update ();

@@ -20,7 +20,7 @@ MainWidget::MainWidget ()
     setAttribute(Qt::WA_TranslucentBackground);
 #endif
     _light = new TrafficLight (this);
-    _label = new QLabel (this);
+    _label = new QLabel (tr ("No data"), this);
     _timer = new QTimer (this);
 
     _label->setAlignment (Qt::AlignHCenter | Qt::AlignVCenter);
@@ -69,7 +69,7 @@ void MainWidget::paintEvent(QPaintEvent *event)
 
 void MainWidget::trafficUpdated ()
 {
-    ExtendedTrafficInfo info = _traffic->lookup_ext (_settings->regionID ());
+    CityTrafficInfo info = _traffic->lookup_ext (_settings->regionID ());
 
     if (info.valid ()) {
         QString data;
@@ -86,7 +86,7 @@ void MainWidget::trafficUpdated ()
         if (_settings->check (Settings::C_ShowTime)) {
             if (!first)
                 data.append (", ");
-            data.append (info.localtime ());
+            data.append (info.ts ().toString ("h:mm"));
             first = false;
         }
 
@@ -100,7 +100,7 @@ void MainWidget::trafficUpdated ()
     }
     else {
         Log::instance ()->add ("trafficUpdated, but info not valid");
-        _light->setColor (ExtendedTrafficInfo::Unknown);
+        _light->setColor (CityTrafficInfo::Unknown);
         _label->setText (tr ("No data"));
     }
 }

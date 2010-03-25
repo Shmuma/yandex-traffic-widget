@@ -21,7 +21,7 @@ protected slots:
 
     void trafficUpdated ()
     {
-        ExtendedTrafficInfo info;
+        CityTrafficInfo info;
 
         printf ("Traffic data updated:\n");
         printf ("ts: %s\n", _traffic.ts ().toString ().toUtf8 ().data ());
